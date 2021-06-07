@@ -1,4 +1,5 @@
 import pygame
+from os import path
 
 pygame.init()
 
@@ -8,6 +9,15 @@ WIDTH,HEIGHT = 600,800
 FPS = 60
 VENTANA_PRINCIPAL = pygame.display.set_mode((WIDTH,HEIGHT))
 WHITE = (255,255,255)
+
+# Funciones para cargar archivos
+
+def up_img(name):
+
+    ruta = path.join("media", name)
+    img = pygame.image.load(ruta)
+
+    return img
 
 # Definiendo pantalla principal
 
