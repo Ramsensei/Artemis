@@ -1,0 +1,3 @@
+Martes 01/06
+-Se creó el repositorio en github para el manejo colaborativo del proyecto
+-Se exploró la extensión LiveShare de Visual Studio Code para trabajar en el código simultáneamente
