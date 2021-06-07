@@ -23,9 +23,11 @@ def up_img(name):
 
 pygame.display.set_caption("Artemis")
 
+BACKGROUND = pygame.transform.scale(up_img("background.png"), (WIDTH,HEIGHT))
+
 def draw_main_window():
 
-    VENTANA_PRINCIPAL.fill(WHITE)
+    VENTANA_PRINCIPAL.blit(BACKGROUND, (0,0))
     pygame.display.update()
 
 # Módulo principal
