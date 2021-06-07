@@ -18,5 +18,11 @@ para poder actualizar el código en github y en el computador
 
 Viernes 04/06
 -Se escogió la biblioteca pygame y se comenzó el código con la pantalla principal
+-Se agrego la carpeta de assets al repositorio
+
+Sábado 05/06
+
+Domingo 06/06
+-Se creo la función para cargar imágenes y se otorgó un fondo a la pantalla principal
 
 
