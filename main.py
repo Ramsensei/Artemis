@@ -14,7 +14,7 @@ WHITE = (255,255,255)
 
 def up_img(name):
 
-    ruta = path.join("media", name)
+    ruta = path.join("assets", name)
     img = pygame.image.load(ruta)
 
     return img
