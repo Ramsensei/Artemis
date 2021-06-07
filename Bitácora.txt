@@ -1,3 +1,17 @@
 Martes 01/06
 -Se creó el repositorio en github para el manejo colaborativo del proyecto
 -Se exploró la extensión LiveShare de Visual Studio Code para trabajar en el código simultáneamente
+
+Miércoles 02/06
+-Se comenzó con la investigación de la biblioteca pygame para evaluar la posibilidad de utilizarla 
+como herramienta de interfaz gráfica
+-Se comenzó el plan de pruebas
+
+Jueves 03/06
+-El compañero Ramsés guió a mi persona (Valesska) para realizar commits en el repositorio de github
+para poder actualizar el código en github y en el computador
+
+Viernes 04/06
+-Se escogió la biblioteca pygame y se comenzó el código con la pantalla principal
+
+
