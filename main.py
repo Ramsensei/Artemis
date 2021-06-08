@@ -14,7 +14,7 @@ VENTANA_PRINCIPAL = pygame.display.set_mode((WIDTH, HEIGHT))
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (64, 64, 64)
-FUENTE = pygame.font.SysFont("Times New Roman", 25)
+FUENTE = pygame.font.SysFont("Times New Roman", 22)
 
 # Funciones para cargar archivos
 
@@ -49,14 +49,21 @@ def draw_button(screen, button, palabra):
 pygame.display.set_caption("Artemis")
 
 BACKGROUND = pygame.transform.scale(up_img("background.png"), (WIDTH, HEIGHT))
+artemis_img = pygame.transform.scale(up_img("artemis.png"), (150,150))
 
-b_play = pygame.Rect(300-125, 300, 250, 100)
-
+b_play = pygame.Rect(300-125, 300, 250, 85)
+b_nivel1 = pygame.Rect(50,425,150,75)
+b_nivel2 = pygame.Rect(225,425,150,75)
+b_nivel3 = pygame.Rect(400,425,150,75)
 
 def draw_main_window():
 
     VENTANA_PRINCIPAL.blit(BACKGROUND, (0, 0))
+    VENTANA_PRINCIPAL.blit(artemis_img,(300-75,50))
     draw_button(VENTANA_PRINCIPAL, b_play, "Iniciar Juego")
+    draw_button(VENTANA_PRINCIPAL, b_nivel1, "Nivel 1")
+    draw_button(VENTANA_PRINCIPAL, b_nivel2, "Nivel 2")
+    draw_button(VENTANA_PRINCIPAL, b_nivel3, "Nivel 3")
     pygame.display.update()
 
 # Módulo principal
@@ -81,7 +88,19 @@ def main():
 
                 if b_play.collidepoint(mouse.get_pos()):
 
-                    print ("Click")
+                    print ("Play")
+
+                if b_nivel1.collidepoint(mouse.get_pos()):
+
+                    print ("Nivel 1")
+                
+                if b_nivel2.collidepoint(mouse.get_pos()):
+
+                    print ("Nivel 2")
+                
+                if b_nivel3.collidepoint(mouse.get_pos()):
+
+                    print ("Nivel 3")
 
         draw_main_window()
 
