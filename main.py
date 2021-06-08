@@ -1,8 +1,7 @@
 import pygame
 from os import path
 from pygame import mouse
-
-from pygame.constants import MOUSEBUTTONDOWN
+from pygame.locals import *
 
 pygame.init()
 
@@ -94,6 +93,7 @@ def main():
 
     clock = pygame.time.Clock()
     run = True
+    play_song("Avengers.mp3")
 
     while run:
 
