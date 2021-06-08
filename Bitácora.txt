@@ -25,4 +25,7 @@ Sábado 05/06
 Domingo 06/06
 -Se creo la función para cargar imágenes y se otorgó un fondo a la pantalla principal
 
+Lunes 07/06
+-Se creo la función para crear botones de manera que se pueda utilizar en cualquier parte del programa
+
 
