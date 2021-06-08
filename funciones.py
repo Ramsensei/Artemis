@@ -1,8 +1,11 @@
 import pygame
 from os import path
-from pygame import mouse
+
 # Variables globales
 
+WIDTH, HEIGHT = 600, 800
+FPS = 60
+VENTANA_PRINCIPAL = pygame.display.set_mode((WIDTH, HEIGHT))
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (64,64,64)

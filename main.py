@@ -2,19 +2,19 @@ import pygame
 from os import path
 from pygame import mouse
 from pygame.locals import MOUSEBUTTONDOWN
-from funciones import up_img, draw_button, play_song
+from funciones import up_img, draw_button, play_song, VENTANA_PRINCIPAL, FPS, WIDTH, HEIGHT
 
 pygame.init()
 
 # Variables globales
 
-WIDTH, HEIGHT = 600, 800
-FPS = 60
-VENTANA_PRINCIPAL = pygame.display.set_mode((WIDTH, HEIGHT))
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-GRAY = (64,64,64)
-FUENTE = pygame.font.SysFont("Times New Roman", 22)
+#WIDTH, HEIGHT = 600, 800
+#FPS = 60
+#VENTANA_PRINCIPAL = pygame.display.set_mode((WIDTH, HEIGHT))
+#WHITE = (255, 255, 255)
+#BLACK = (0, 0, 0)
+#GRAY = (64,64,64)
+#FUENTE = pygame.font.SysFont("Times New Roman", 22)
 
 # Definiendo pantalla principal
 
