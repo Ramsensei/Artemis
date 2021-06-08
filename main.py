@@ -18,13 +18,34 @@ FUENTE = pygame.font.SysFont("Times New Roman", 22)
 
 # Funciones para cargar archivos
 
-
 def up_img(name):
 
     ruta = path.join("assets", name)
     img = pygame.image.load(ruta)
 
     return img
+
+# Funciones de reproducción de sonido
+
+pygame.mixer.init()
+
+def load_MP3(nombre):
+
+    return path.join("assets", nombre)
+
+
+def play_song(MP3):
+
+    stop_song()
+
+    pygame.mixer.music.load(load_MP3(MP3))
+    pygame.mixer.music.play(-1)
+
+def stop_song():
+
+    if pygame.mixer.music.get_busy():
+
+        pygame.mixer.music.stop()
 
 # Función para crear botones
 
