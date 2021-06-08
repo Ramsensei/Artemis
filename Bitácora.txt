@@ -27,5 +27,6 @@ Domingo 06/06
 
 Lunes 07/06
 -Se creo la función para crear botones de manera que se pueda utilizar en cualquier parte del programa
-
+-Se agregaron los botones de selección de niveles e inicio del juego
+-Se agregó una imagen ilustrativa a la pantalla principal
 

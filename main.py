@@ -49,17 +49,17 @@ def draw_button(screen, button, palabra):
 pygame.display.set_caption("Artemis")
 
 BACKGROUND = pygame.transform.scale(up_img("background.png"), (WIDTH, HEIGHT))
-artemis_img = pygame.transform.scale(up_img("artemis.png"), (150,150))
+artemis_img = pygame.transform.scale(up_img("artemis.png"), (300,300))
 
-b_play = pygame.Rect(300-125, 300, 250, 85)
-b_nivel1 = pygame.Rect(50,425,150,75)
-b_nivel2 = pygame.Rect(225,425,150,75)
-b_nivel3 = pygame.Rect(400,425,150,75)
+b_play = pygame.Rect(300-125, 350, 250, 85)
+b_nivel1 = pygame.Rect(50,475,150,75)
+b_nivel2 = pygame.Rect(225,475,150,75)
+b_nivel3 = pygame.Rect(400,475,150,75)
 
 def draw_main_window():
 
     VENTANA_PRINCIPAL.blit(BACKGROUND, (0, 0))
-    VENTANA_PRINCIPAL.blit(artemis_img,(300-75,50))
+    VENTANA_PRINCIPAL.blit(artemis_img,(150,25))
     draw_button(VENTANA_PRINCIPAL, b_play, "Iniciar Juego")
     draw_button(VENTANA_PRINCIPAL, b_nivel1, "Nivel 1")
     draw_button(VENTANA_PRINCIPAL, b_nivel2, "Nivel 2")
