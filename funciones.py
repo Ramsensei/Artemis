@@ -1,5 +1,6 @@
 import pygame
 from os import path
+pygame.init()
 
 # Variables globales
 

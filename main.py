@@ -1,8 +1,8 @@
 import pygame
-pygame.init()
 from funciones import FPS, VENTANA_PRINCIPAL
 from clases import Menu
 
+pygame.init()
 
 # Módulo principal
 
