@@ -1,4 +1,5 @@
 import pygame as pg
+from pygame.locals import MOUSEBUTTONDOWN
 from funciones import draw_button, up_img, WIDTH, HEIGHT, play_song
 
 
@@ -25,7 +26,7 @@ class Menu(object):
 			if event.type == pg.QUIT:
 				return False
 
-			if event.type == pg.locals.MOUSEBUTTONDOWN and event.button == 1:
+			if event.type == MOUSEBUTTONDOWN and event.button == 1:
 
 				if self.b_play.collidepoint(pg.mouse.get_pos()):
 					print("Play")

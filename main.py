@@ -1,5 +1,6 @@
 import pygame
-from funciones import FPS
+pygame.init()
+from funciones import FPS, VENTANA_PRINCIPAL
 from clases import Menu
 
 
@@ -7,7 +8,7 @@ from clases import Menu
 
 
 def main():
-    pygame.init()
+
     pygame.display.set_caption("Artemis")
     clock = pygame.time.Clock()
     run = True
@@ -17,7 +18,7 @@ def main():
     while run:
         run = menu.process_events()
         menu.run_logic()
-        menu.display_frame()
+        menu.display_frame(VENTANA_PRINCIPAL)
         clock.tick(FPS)
     pygame.quit()
 
