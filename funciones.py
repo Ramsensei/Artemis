@@ -1,5 +1,6 @@
 import pygame
 from os import path
+
 pygame.init()
 
 # Variables globales
@@ -7,6 +8,7 @@ pygame.init()
 WIDTH, HEIGHT = 600, 800
 FPS = 60
 VENTANA_PRINCIPAL = pygame.display.set_mode((WIDTH, HEIGHT))
+CHANGE = "No"
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (64, 64, 64)
@@ -58,3 +60,5 @@ def draw_button(screen, button, palabra):
     txt = FUENTE.render(palabra, True, WHITE)
     screen.blit(txt, (button.x + (button.width - txt.get_width()) / 2,
                       button.y + (button.height - txt.get_height()) / 2))
+
+

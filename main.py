@@ -1,6 +1,6 @@
 import pygame
 from funciones import FPS, VENTANA_PRINCIPAL
-from clases import Menu
+import clases
 
 pygame.init()
 
@@ -13,12 +13,18 @@ def main():
     clock = pygame.time.Clock()
     run = True
 
-    menu = Menu()
+    screen = clases.Menu()
 
     while run:
-        run = menu.process_events()
-        menu.run_logic()
-        menu.display_frame(VENTANA_PRINCIPAL)
+        run = screen.process_events()
+        if screen.change == "Menu":
+            screen = clases.Menu()
+        elif screen.change == "Game":
+            screen = clases.Game()
+
+        screen.run_logic()
+        screen.display_frame(VENTANA_PRINCIPAL)
+
         clock.tick(FPS)
     pygame.quit()
 
