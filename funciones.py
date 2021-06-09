@@ -1,5 +1,8 @@
 import pygame
+import sys
 from os import path
+
+pygame.init()
 
 # Variables globales
 
@@ -10,6 +13,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (64,64,64)
 FUENTE = pygame.font.SysFont("Times New Roman", 22)
+
 
 # Funciones para cargar archivos
 
