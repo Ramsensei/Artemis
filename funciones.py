@@ -1,6 +1,7 @@
 import pygame
 import sys
 from os import path
+
 pygame.init()
 
 pygame.init()
@@ -61,3 +62,5 @@ def draw_button(screen, button, palabra):
     txt = FUENTE.render(palabra, True, WHITE)
     screen.blit(txt, (button.x + (button.width - txt.get_width()) / 2,
                       button.y + (button.height - txt.get_height()) / 2))
+
+
