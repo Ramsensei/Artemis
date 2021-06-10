@@ -17,10 +17,15 @@ def main():
 
     while run:
         run = screen.process_events()
+
         if screen.change == "Menu":
             screen = clases.Menu()
         elif screen.change == "Game1":
             screen = clases.Game1()
+        elif screen.change == "Game2":
+            screen = clases.Game2()
+        elif screen.change == "Game3":
+            screen = clases.Game3()
 
         screen.run_logic()
         screen.display_frame(VENTANA_PRINCIPAL)
