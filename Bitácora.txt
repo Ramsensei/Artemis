@@ -31,3 +31,6 @@ Lunes 07/06
 -Se agregó una imagen ilustrativa a la pantalla principal
 -Se creó el archivo funciones para alojar las funciones principales
 -Se pasó el código del menú a una clase
+
+Jueves 08/06
+-Se agregaron las pantallas de los niveles con su respectivo botón de regreso a la pantalla principal
