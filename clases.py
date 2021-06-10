@@ -31,10 +31,10 @@ class Menu(object):
             if event.type == MOUSEBUTTONDOWN and event.button == 1:
 
                 if self.b_play.collidepoint(pg.mouse.get_pos()):
-                    self.change = "Game"
+                    self.change = "Game1"
 
                 if self.b_nivel1.collidepoint(pg.mouse.get_pos()):
-                    print("Nivel 1")
+                    self.change = "Game1"
 
                 if self.b_nivel2.collidepoint(pg.mouse.get_pos()):
                     print("Nivel 2")
@@ -56,16 +56,15 @@ class Menu(object):
         pg.display.update()
 
 
-class Game(object):
+class Game1(object):
     change = "No"
-    name = "Game"
+    name = "Game1"
     b_back = None
 
     def __init__(self):
-        self.BACKGROUND = pg.transform.scale(up_img("background.png"), (WIDTH, HEIGHT))
-        self.artemis_img = pg.transform.scale(up_img("artemis.png"), (300, 300))
+        self.BACKGROUND = pg.transform.scale(up_img("nebula1.png"), (WIDTH, HEIGHT))
 
-        self.b_back = pg.Rect(50, 475, 150, 75)
+        self.b_back = pg.Rect(450, 0, 150, 75)
 
         play_song("Avengers.mp3")
 
@@ -86,6 +85,5 @@ class Game(object):
 
     def display_frame(self, screen):
         screen.blit(self.BACKGROUND, (0, 0))
-        screen.blit(self.artemis_img, (150, 25))
         draw_button(screen, self.b_back, "Menu")
         pg.display.update()

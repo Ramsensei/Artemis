@@ -19,8 +19,8 @@ def main():
         run = screen.process_events()
         if screen.change == "Menu":
             screen = clases.Menu()
-        elif screen.change == "Game":
-            screen = clases.Game()
+        elif screen.change == "Game1":
+            screen = clases.Game1()
 
         screen.run_logic()
         screen.display_frame(VENTANA_PRINCIPAL)
