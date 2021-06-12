@@ -56,17 +56,19 @@ class Menu(object):
         pg.display.update()
 
 
-class Game1(object):
+class Game(object):
     change = "No"
     name = "Game1"
     b_back = None
+    background = ["nebula1.png", "nebula2.png", "nebula3.png"]
+    songs = ["susp1.mp3", "susp2.mp3", "susp3.mp3"]
 
-    def __init__(self):
-        self.BACKGROUND = pg.transform.scale(up_img("nebula1.png"), (WIDTH, HEIGHT))
+    def __init__(self, level):
+        self.BACKGROUND = pg.transform.scale(up_img(self.background[level-1]), (WIDTH, HEIGHT))
 
         self.b_back = pg.Rect(450, 0, 150, 75)
 
-        play_song("susp1.mp3")
+        play_song(self.songs[level-1])
 
     def process_events(self):
         for event in pg.event.get():
@@ -88,67 +90,3 @@ class Game1(object):
         draw_button(screen, self.b_back, "Menu")
         pg.display.update()
 
-class Game2(object):
-    change = "No"
-    name = "Game2"
-    b_back = None
-
-    def __init__(self):
-        self.BACKGROUND = pg.transform.scale(up_img("nebula2.png"), (WIDTH, HEIGHT))
-
-        self.b_back = pg.Rect(450, 0, 150, 75)
-
-        play_song("susp2.mp3")
-
-    def process_events(self):
-        for event in pg.event.get():
-
-            if event.type == pg.QUIT:
-                return False
-
-            if event.type == MOUSEBUTTONDOWN and event.button == 1:
-
-                if self.b_back.collidepoint(pg.mouse.get_pos()):
-                    self.change = "Menu"
-        return True
-
-    def run_logic(self):
-        pass
-
-    def display_frame(self, screen):
-        screen.blit(self.BACKGROUND, (0, 0))
-        draw_button(screen, self.b_back, "Menu")
-        pg.display.update()
-
-
-class Game3(object):
-    change = "No"
-    name = "Game3"
-    b_back = None
-
-    def __init__(self):
-        self.BACKGROUND = pg.transform.scale(up_img("nebula3.png"), (WIDTH, HEIGHT))
-
-        self.b_back = pg.Rect(450, 0, 150, 75)
-
-        play_song("susp3.mp3")
-
-    def process_events(self):
-        for event in pg.event.get():
-
-            if event.type == pg.QUIT:
-                return False
-
-            if event.type == MOUSEBUTTONDOWN and event.button == 1:
-
-                if self.b_back.collidepoint(pg.mouse.get_pos()):
-                    self.change = "Menu"
-        return True
-
-    def run_logic(self):
-        pass
-
-    def display_frame(self, screen):
-        screen.blit(self.BACKGROUND, (0, 0))
-        draw_button(screen, self.b_back, "Menu")
-        pg.display.update()
