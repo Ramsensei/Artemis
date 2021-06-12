@@ -63,10 +63,10 @@ class Game1(object):
 
     def __init__(self):
         self.BACKGROUND = pg.transform.scale(up_img("nebula1.png"), (WIDTH, HEIGHT))
-
+        
         self.b_back = pg.Rect(450, 0, 150, 75)
 
-        play_song("Avengers.mp3")
+        play_song("susp1.mp3")
 
     def process_events(self):
         for event in pg.event.get():
@@ -98,7 +98,7 @@ class Game2(object):
 
         self.b_back = pg.Rect(450, 0, 150, 75)
 
-        play_song("Avengers.mp3")
+        play_song("susp2.mp3")
 
     def process_events(self):
         for event in pg.event.get():
@@ -131,7 +131,7 @@ class Game3(object):
 
         self.b_back = pg.Rect(450, 0, 150, 75)
 
-        play_song("Avengers.mp3")
+        play_song("susp3.mp3")
 
     def process_events(self):
         for event in pg.event.get():

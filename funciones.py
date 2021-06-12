@@ -1,5 +1,6 @@
 import pygame
 import sys
+import glob
 from os import path
 
 pygame.init()
@@ -24,7 +25,6 @@ def up_img(name):
     img = pygame.image.load(ruta)
 
     return img
-
 
 # Funciones de reproducción de sonido
 
