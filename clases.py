@@ -63,7 +63,7 @@ class Game1(object):
 
     def __init__(self):
         self.BACKGROUND = pg.transform.scale(up_img("nebula1.png"), (WIDTH, HEIGHT))
-        
+
         self.b_back = pg.Rect(450, 0, 150, 75)
 
         play_song("susp1.mp3")

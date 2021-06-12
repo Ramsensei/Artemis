@@ -16,6 +16,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (64, 64, 64)
 FUENTE = pygame.font.SysFont("Times New Roman", 22)
+SPEED = 5
 
 
 # Funciones para cargar archivos
@@ -25,6 +26,27 @@ def up_img(name):
     img = pygame.image.load(ruta)
 
     return img
+
+# Funciones para cargar varias imágenes y animar
+
+def cargarVariasImg(inputx, listaResultado):
+
+    if(inputx == []):
+
+        return listaResultado
+
+    else:
+
+        listaResultado.append(pygame.image.load(inputx[0]))
+        return cargarVariasImg(inputx[1:], listaResultado)
+
+
+def cargarSprites(patron):
+
+    frames = glob.glob("assets\\sprite\\"+patron)
+    frames.sort()
+    return cargarVariasImg(frames, [])
+
 
 # Funciones de reproducción de sonido
 
