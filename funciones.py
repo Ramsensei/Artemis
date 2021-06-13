@@ -1,5 +1,4 @@
 import pygame
-import sys
 import glob
 from os import path
 
@@ -37,7 +36,7 @@ def cargarVariasImg(inputx, listaResultado):
 
     else:
 
-        listaResultado.append(pygame.image.load(inputx[0]))
+        listaResultado.append(pygame.image.load(inputx[0]).convert())
         return cargarVariasImg(inputx[1:], listaResultado)
 
 

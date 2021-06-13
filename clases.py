@@ -4,7 +4,9 @@ from funciones import *
 
 text_i = 'Ingrese su Nombre'
 name_text = ''
+
 ACTIVE = False
+
 
 class Menu(object):
     name = "Menu"
@@ -18,7 +20,7 @@ class Menu(object):
         global ACTIVE, name_text
         ACTIVE = False
         name_text = ''
-        
+
         self.BACKGROUND = pg.transform.scale(up_img("background.png"), (WIDTH, HEIGHT))
         self.artemis_img = pg.transform.scale(up_img("artemis.png"), (300, 300))
 
@@ -27,7 +29,7 @@ class Menu(object):
         self.b_nivel2 = pg.Rect(225, 575, 150, 75)
         self.b_nivel3 = pg.Rect(400, 575, 150, 75)
 
-        self.input_box =pg.Rect(100, 370, 400, 50)
+        self.input_box = pg.Rect(100, 370, 400, 50)
 
         play_song("Avengers.mp3")
 
@@ -65,7 +67,6 @@ class Menu(object):
                     else:
                         name_text += event.unicode
 
-                    
         return True
 
     def run_logic(self):
@@ -92,16 +93,18 @@ class Game(object):
     change = "No"
     name = "Game1"
     b_back = None
+    player = None
     background = ["nebula1.png", "nebula2.png", "nebula3.png"]
     songs = ["susp1.mp3", "susp2.mp3", "susp3.mp3"]
-    sprite_list = []
+    sprite = []
 
     def __init__(self, level):
-        self.BACKGROUND = pg.transform.scale(up_img(self.background[level-1]), (WIDTH, HEIGHT))
-
+        self.BACKGROUND = pg.transform.scale(up_img(self.background[level - 1]), (WIDTH, HEIGHT))
+        self.sprites = pygame.sprite.Group()
         self.b_back = pg.Rect(450, 0, 150, 75)
-
-        play_song(self.songs[level-1])
+        self.player = Player()
+        self.sprites.add(self.player)
+        play_song(self.songs[level - 1])
 
     def process_events(self):
         for event in pg.event.get():
@@ -116,26 +119,33 @@ class Game(object):
         return True
 
     def run_logic(self):
-        pass
+        self.sprites.update()
 
     def display_frame(self, screen):
         screen.blit(self.BACKGROUND, (0, 0))
         draw_button(screen, self.b_back, "Menu")
+        self.player.next_frame()
+        self.sprites.draw(screen)
         pg.display.update()
 
 
 class Player(pygame.sprite.Sprite):
     frame = 0
+    image_list = []
 
     def __init__(self):
         super().__init__()
-        self.image_list = cargarSprites("tile00")
-        self.image = pygame.image.load(self.image_list[frame]).convert()
+        self.image_list = cargarSprites("tile*.png")
+        self.image = self.image_list[self.frame]
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-		
+
     def update(self):
         pass
 
     def next_frame(self):
-        self.frame[]
+        self.frame += 1
+        if self.frame > 29:
+            self.frame = 0
+        self.image = pygame.image.load(self.image_list[self.frame]).convert()
+        self.image.set_colorkey(BLACK)
