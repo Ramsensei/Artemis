@@ -112,6 +112,12 @@ class Game(object):
             if event.type == pg.QUIT:
                 return False
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    self.player.speed = -3
+                if event.key == pygame.K_RIGHT:
+                    self.player.speed = 3
+
             if event.type == MOUSEBUTTONDOWN and event.button == 1:
 
                 if self.b_back.collidepoint(pg.mouse.get_pos()):
@@ -130,22 +136,36 @@ class Game(object):
 
 
 class Player(pygame.sprite.Sprite):
-    frame = 0
+    frame = [0, True]
     image_list = []
+    speed = 0
 
     def __init__(self):
         super().__init__()
         self.image_list = cargarSprites("tile*.png")
-        self.image = self.image_list[self.frame]
+        self.image = self.image_list[self.frame[0]]
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
+        self.rect.x = 240
+        self.rect.y = 500
 
     def update(self):
-        pass
+        self.rect.x += self.speed
+        if self.rect.x < 0:
+            self.rect.x = 0
+        if self.rect.x > 461:
+            self.rect.x = 461
 
     def next_frame(self):
-        self.frame += 1
-        if self.frame > 29:
-            self.frame = 0
-        self.image = pygame.image.load(self.image_list[self.frame]).convert()
+        if self.frame[1]:
+            self.frame[0] += 1
+        else:
+            self.frame[0] -= 1
+        if self.frame[0] > 29:
+            self.frame[0] = 29
+            self.frame[1] = False
+        if self.frame[0] < 0:
+            self.frame[0] = 0
+            self.frame[1] = True
+        self.image = self.image_list[self.frame[0]]
         self.image.set_colorkey(BLACK)
