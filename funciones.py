@@ -19,6 +19,7 @@ SPEED = 5
 text_i = 'Ingrese su Nombre'
 name_text = ''
 
+
 # Funciones para cargar archivos
 
 def up_img(name):
@@ -92,7 +93,7 @@ def draw_entry(screen, input_box, text, color):
     screen.blit(txt, (input_box.x + 5, input_box.y + 15))
 
 
-def draw_text(screen, text, color, x, y):
+def draw_text(text, color, x, y, screen=VENTANA_PRINCIPAL):
     txt = F_TITULO.render(text, True, color)
     screen.blit(txt, (x, y))
 

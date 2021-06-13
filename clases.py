@@ -16,6 +16,8 @@ class Menu(object):
     def __init__(self):
         self.Active = False
 
+        fc.SCORE = 0
+
         self.BACKGROUND = pg.transform.scale(fc.up_img("background.png"), (fc.WIDTH, fc.HEIGHT))
         self.artemis_img = pg.transform.scale(fc.up_img("artemis.png"), (300, 300))
 
@@ -147,11 +149,17 @@ class Game(object):
         self.time_end = time.time()
         if self.time_end - self.time_init >= 1:
             self.time_init = time.time()
-            fc.SCORE += 1
+            if self.level == 1:
+                fc.SCORE += 1
+            if self.level == 2:
+                fc.SCORE += 3
+            if self.level == 3:
+                fc.SCORE += 5
 
     def display_frame(self, screen):
         screen.blit(self.BACKGROUND, (0, 0))
         fc.draw_button(screen, self.b_back, "Menu")
+        fc.draw_text("Score: " + str(fc.SCORE), fc.WHITE, 10, 30)
         self.player.next_frame()
         self.sprites.draw(screen)
         pg.display.update()
