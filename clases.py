@@ -114,9 +114,23 @@ class Game(object):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    self.player.speed = -3
+                    self.player.speedx -= 3
                 if event.key == pygame.K_RIGHT:
-                    self.player.speed = 3
+                    self.player.speedx += 3
+                if event.key == pygame.K_UP:
+                    self.player.speedy -= 3
+                if event.key == pygame.K_DOWN:
+                    self.player.speedy += 3
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT:
+                    self.player.speedx += 3
+                if event.key == pygame.K_RIGHT:
+                    self.player.speedx -= 3
+                if event.key == pygame.K_UP:
+                    self.player.speedy += 3
+                if event.key == pygame.K_DOWN:
+                    self.player.speedy -= 3
 
             if event.type == MOUSEBUTTONDOWN and event.button == 1:
 
@@ -138,7 +152,8 @@ class Game(object):
 class Player(pygame.sprite.Sprite):
     frame = [0, True]
     image_list = []
-    speed = 0
+    speedx = 0
+    speedy = 0
 
     def __init__(self):
         super().__init__()
@@ -150,11 +165,16 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = 500
 
     def update(self):
-        self.rect.x += self.speed
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
         if self.rect.x < 0:
             self.rect.x = 0
         if self.rect.x > 461:
             self.rect.x = 461
+        if self.rect.y < 0:
+            self.rect.y = 0
+        if self.rect.y > 684:
+            self.rect.y = 684
 
     def next_frame(self):
         if self.frame[1]:

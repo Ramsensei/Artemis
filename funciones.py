@@ -26,11 +26,11 @@ def up_img(name):
 
     return img
 
+
 # Funciones para cargar varias imágenes y animar
 
 def cargarVariasImg(inputx, listaResultado):
-
-    if(inputx == []):
+    if inputx == []:
 
         return listaResultado
 
@@ -41,8 +41,7 @@ def cargarVariasImg(inputx, listaResultado):
 
 
 def cargarSprites(patron):
-
-    frames = glob.glob("assets\\sprite\\"+patron)
+    frames = glob.glob("assets\\sprite\\" + patron)
     frames.sort()
     return cargarVariasImg(frames, [])
 
@@ -72,7 +71,6 @@ def stop_song():
 
 
 def draw_button(screen, button, palabra):
-
     if button.collidepoint(pygame.mouse.get_pos()):
 
         pygame.draw.rect(screen, GRAY, button, 0)
@@ -87,17 +85,16 @@ def draw_button(screen, button, palabra):
 
 
 def draw_entry(screen, input_box, text, color):
-
     pygame.draw.rect(screen, color, input_box, 0)
 
     txt = FUENTE.render(text, True, BLACK)
-    screen.blit(txt, (input_box.x+5, input_box.y+15))
+    screen.blit(txt, (input_box.x + 5, input_box.y + 15))
+
 
 def draw_text(screen, text, color, x, y):
-
     txt = F_TITULO.render(text, True, color)
-    screen.blit(txt, (x,y))
-    
+    screen.blit(txt, (x, y))
+
 
 # Función de ordenamiento
 
@@ -127,6 +124,3 @@ def quick_sort(array):
         return quick_sort(less) + equal + quick_sort(greater)  # Lamada recursiva final
     else:
         return array
-
-
-
