@@ -16,7 +16,8 @@ FUENTE = pygame.font.SysFont("Times New Roman", 22)
 F_TITULO = pygame.font.SysFont("Times New Roman", 28)
 SCORE = 0
 SPEED = 5
-
+text_i = 'Ingrese su Nombre'
+name_text = ''
 
 # Funciones para cargar archivos
 

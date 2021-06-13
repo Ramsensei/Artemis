@@ -1,11 +1,6 @@
 import pygame as pg
 from pygame.locals import MOUSEBUTTONDOWN
-from funciones import *
-
-text_i = 'Ingrese su Nombre'
-name_text = ''
-
-ACTIVE = False
+import funciones as fc
 
 
 class Menu(object):
@@ -15,14 +10,13 @@ class Menu(object):
     b_nivel1 = None
     b_nivel2 = None
     b_nivel3 = None
+    Active = False
 
     def __init__(self):
-        global ACTIVE, name_text
-        ACTIVE = False
-        name_text = ''
+        self.Active = False
 
-        self.BACKGROUND = pg.transform.scale(up_img("background.png"), (WIDTH, HEIGHT))
-        self.artemis_img = pg.transform.scale(up_img("artemis.png"), (300, 300))
+        self.BACKGROUND = pg.transform.scale(fc.up_img("background.png"), (fc.WIDTH, fc.HEIGHT))
+        self.artemis_img = pg.transform.scale(fc.up_img("artemis.png"), (300, 300))
 
         self.b_play = pg.Rect(300 - 125, 450, 250, 85)
         self.b_nivel1 = pg.Rect(50, 575, 150, 75)
@@ -31,7 +25,7 @@ class Menu(object):
 
         self.input_box = pg.Rect(100, 370, 400, 50)
 
-        play_song("Avengers.mp3")
+        fc.play_song("Avengers.mp3")
 
     def process_events(self):
 
@@ -55,17 +49,17 @@ class Menu(object):
                     self.change = "Game3"
 
                 if self.input_box.collidepoint(event.pos):
-                    ACTIVE = True
+                    self.Active = True
 
             if event.type == pg.KEYDOWN:
 
-                if ACTIVE:
+                if self.Active:
 
                     if event.key == pg.K_BACKSPACE:
-                        name_text = name_text[:-1]
+                        fc.name_text = fc.name_text[:-1]
 
                     else:
-                        name_text += event.unicode
+                        fc.name_text += event.unicode
 
         return True
 
@@ -75,16 +69,16 @@ class Menu(object):
     def display_frame(self, screen):
         screen.blit(self.BACKGROUND, (0, 0))
         screen.blit(self.artemis_img, (150, 25))
-        draw_button(screen, self.b_play, "Iniciar Juego")
-        draw_button(screen, self.b_nivel1, "Nivel 1")
-        draw_button(screen, self.b_nivel2, "Nivel 2")
-        draw_button(screen, self.b_nivel3, "Nivel 3")
+        fc.draw_button(screen, self.b_play, "Iniciar Juego")
+        fc.draw_button(screen, self.b_nivel1, "Nivel 1")
+        fc.draw_button(screen, self.b_nivel2, "Nivel 2")
+        fc.draw_button(screen, self.b_nivel3, "Nivel 3")
 
-        if ACTIVE:
-            draw_entry(screen, self.input_box, name_text, WHITE)
+        if self.Active:
+            fc.draw_entry(screen, self.input_box, fc.name_text, fc.WHITE)
 
         else:
-            draw_entry(screen, self.input_box, text_i, WHITE)
+            fc.draw_entry(screen, self.input_box, fc.text_i, fc.WHITE)
 
         pg.display.update()
 
@@ -99,12 +93,12 @@ class Game(object):
     sprite = []
 
     def __init__(self, level):
-        self.BACKGROUND = pg.transform.scale(up_img(self.background[level - 1]), (WIDTH, HEIGHT))
-        self.sprites = pygame.sprite.Group()
+        self.BACKGROUND = pg.transform.scale(fc.up_img(self.background[level - 1]), (fc.WIDTH, fc.HEIGHT))
+        self.sprites = pg.sprite.Group()
         self.b_back = pg.Rect(450, 0, 150, 75)
         self.player = Player()
         self.sprites.add(self.player)
-        play_song(self.songs[level - 1])
+        fc.play_song(self.songs[level - 1])
 
     def process_events(self):
         for event in pg.event.get():
@@ -112,24 +106,24 @@ class Game(object):
             if event.type == pg.QUIT:
                 return False
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_LEFT:
                     self.player.speedx -= 3
-                if event.key == pygame.K_RIGHT:
+                if event.key == pg.K_RIGHT:
                     self.player.speedx += 3
-                if event.key == pygame.K_UP:
+                if event.key == pg.K_UP:
                     self.player.speedy -= 3
-                if event.key == pygame.K_DOWN:
+                if event.key == pg.K_DOWN:
                     self.player.speedy += 3
 
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT:
+            if event.type == pg.KEYUP:
+                if event.key == pg.K_LEFT:
                     self.player.speedx += 3
-                if event.key == pygame.K_RIGHT:
+                if event.key == pg.K_RIGHT:
                     self.player.speedx -= 3
-                if event.key == pygame.K_UP:
+                if event.key == pg.K_UP:
                     self.player.speedy += 3
-                if event.key == pygame.K_DOWN:
+                if event.key == pg.K_DOWN:
                     self.player.speedy -= 3
 
             if event.type == MOUSEBUTTONDOWN and event.button == 1:
@@ -143,13 +137,13 @@ class Game(object):
 
     def display_frame(self, screen):
         screen.blit(self.BACKGROUND, (0, 0))
-        draw_button(screen, self.b_back, "Menu")
+        fc.draw_button(screen, self.b_back, "Menu")
         self.player.next_frame()
         self.sprites.draw(screen)
         pg.display.update()
 
 
-class Player(pygame.sprite.Sprite):
+class Player(pg.sprite.Sprite):
     frame = [0, True]
     image_list = []
     speedx = 0
@@ -157,9 +151,9 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-        self.image_list = cargarSprites("tile*.png")
+        self.image_list = fc.cargarSprites("tile*.png")
         self.image = self.image_list[self.frame[0]]
-        self.image.set_colorkey(BLACK)
+        self.image.set_colorkey(fc.BLACK)
         self.rect = self.image.get_rect()
         self.rect.x = 240
         self.rect.y = 500
@@ -188,4 +182,4 @@ class Player(pygame.sprite.Sprite):
             self.frame[0] = 0
             self.frame[1] = True
         self.image = self.image_list[self.frame[0]]
-        self.image.set_colorkey(BLACK)
+        self.image.set_colorkey(fc.BLACK)
