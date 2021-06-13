@@ -12,12 +12,18 @@ VENTANA_PRINCIPAL = pygame.display.set_mode((WIDTH, HEIGHT))
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (64, 64, 64)
-FUENTE = pygame.font.SysFont("Times New Roman", 22)
-F_TITULO = pygame.font.SysFont("Times New Roman", 28)
+FUENTE = pygame.font.SysFont("Times New Roman", 24)
 SCORE = 0
 SPEED = 5
 text_i = 'Ingrese su Nombre'
 name_text = ''
+info = ("Costa Rica\nInstituto Tecnológico de Costa Rica"+
+"\nIngeniería en computadores\nTaller de Programación\nGrupo 02\nI Semestre 2021"+
+"\nProf: Milton Villegas Lemus\nVersión: Artemis 1.0\nAutores: " +
+"\nValesska Blanco Montoya & "+
+"\nDarío Gutiérrez Rodríguez")
+about = info.split('\n')
+
 
 
 # Funciones para cargar archivos
@@ -94,8 +100,18 @@ def draw_entry(screen, input_box, text, color):
 
 
 def draw_text(text, color, x, y, screen=VENTANA_PRINCIPAL):
-    txt = F_TITULO.render(text, True, color)
+    txt = FUENTE.render(text, True, color)
     screen.blit(txt, (x, y))
+
+def draw_text_lines(list_text, color, x, y, screen=VENTANA_PRINCIPAL):
+
+    if list_text == []:
+        return
+    else:
+        txt = FUENTE.render(list_text[0], True, color)
+        screen.blit(txt, (x, y))
+        return draw_text_lines(list_text[1:], color, x, y+40)
+
 
 
 # Función de ordenamiento
@@ -123,6 +139,7 @@ def quick_sort(array):
 
         do_lists(0)
 
-        return quick_sort(less) + equal + quick_sort(greater)  # Lamada recursiva final
+        # Lamada recursiva final
+        return quick_sort(less) + equal + quick_sort(greater)
     else:
         return array

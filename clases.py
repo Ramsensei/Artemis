@@ -26,6 +26,9 @@ class Menu(object):
         self.b_nivel2 = pg.Rect(225, 575, 150, 75)
         self.b_nivel3 = pg.Rect(400, 575, 150, 75)
 
+        self.b_about = pg.Rect(150, 675, 150, 75)
+        self.b_top = pg.Rect(325, 675, 150, 75)
+
         self.input_box = pg.Rect(100, 370, 400, 50)
 
         fc.play_song("Avengers.mp3")
@@ -50,6 +53,9 @@ class Menu(object):
 
                 if self.b_nivel3.collidepoint(pg.mouse.get_pos()):
                     self.change = "Game3"
+
+                if self.b_about.collidepoint(pg.mouse.get_pos()):
+                    self.change = "About"
 
                 if self.input_box.collidepoint(event.pos):
                     self.Active = True
@@ -76,6 +82,8 @@ class Menu(object):
         fc.draw_button(screen, self.b_nivel1, "Nivel 1")
         fc.draw_button(screen, self.b_nivel2, "Nivel 2")
         fc.draw_button(screen, self.b_nivel3, "Nivel 3")
+        fc.draw_button(screen, self.b_about, "About")
+        fc.draw_button(screen, self.b_top, "Top 10")
 
         if self.Active:
             fc.draw_entry(screen, self.input_box, fc.name_text, fc.WHITE)
@@ -85,6 +93,40 @@ class Menu(object):
 
         pg.display.update()
 
+class About(object):
+    change = "No"
+    name = "About"
+    b_back = None
+
+    def __init__(self):
+
+        self.BACKGROUND = pg.transform.scale(fc.up_img("background.png"), (fc.WIDTH, fc.HEIGHT))
+        self.b_back = pg.Rect(450, 0, 150, 75)
+
+        fc.play_song("Avengers.mp3")
+
+    def process_events(self):
+        for event in pg.event.get():
+
+            if event.type == pg.QUIT:
+                return False
+
+            if event.type == MOUSEBUTTONDOWN and event.button == 1:
+
+                if self.b_back.collidepoint(pg.mouse.get_pos()):
+                    self.change = "Menu"
+
+        return True
+
+    def run_logic(self):
+        pass
+
+    def display_frame(self, screen):
+
+        screen.blit(self.BACKGROUND, (0, 0))
+        fc.draw_button(screen, self.b_back, "Menu")
+        fc.draw_text_lines(fc.about, fc.WHITE, 70, 100)
+        pg.display.update()
 
 class Game(object):
     change = "No"
@@ -160,6 +202,7 @@ class Game(object):
         screen.blit(self.BACKGROUND, (0, 0))
         fc.draw_button(screen, self.b_back, "Menu")
         fc.draw_text("Score: " + str(fc.SCORE), fc.WHITE, 10, 30)
+        fc.draw_text("Jugador: " + fc.name_text, fc.WHITE, 100, 30)
         self.player.next_frame()
         self.sprites.draw(screen)
         pg.display.update()
