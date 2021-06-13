@@ -1,7 +1,9 @@
 import pygame as pg
 from pygame.locals import MOUSEBUTTONDOWN
 from funciones import *
-text = ''
+
+text_i = 'Ingrese su Nombre'
+name_text = ''
 ACTIVE = False
 
 class Menu(object):
@@ -13,6 +15,10 @@ class Menu(object):
     b_nivel3 = None
 
     def __init__(self):
+        global ACTIVE, name_text
+        ACTIVE = False
+        name_text = ''
+        
         self.BACKGROUND = pg.transform.scale(up_img("background.png"), (WIDTH, HEIGHT))
         self.artemis_img = pg.transform.scale(up_img("artemis.png"), (300, 300))
 
@@ -26,8 +32,6 @@ class Menu(object):
         play_song("Avengers.mp3")
 
     def process_events(self):
-
-        global ACTIVE, text
 
         for event in pg.event.get():
 
@@ -51,18 +55,15 @@ class Menu(object):
                 if self.input_box.collidepoint(event.pos):
                     ACTIVE = True
 
-                else:
-                    ACTIVE = False
-
             if event.type == pg.KEYDOWN:
 
                 if ACTIVE:
 
                     if event.key == pg.K_BACKSPACE:
-                        text = text[:-1]
+                        name_text = name_text[:-1]
 
                     else:
-                        text += event.unicode
+                        name_text += event.unicode
 
                     
         return True
@@ -77,13 +78,12 @@ class Menu(object):
         draw_button(screen, self.b_nivel1, "Nivel 1")
         draw_button(screen, self.b_nivel2, "Nivel 2")
         draw_button(screen, self.b_nivel3, "Nivel 3")
-        draw_text(screen, "Ingrese su nombre", WHITE, 150, 320)
 
         if ACTIVE:
-            draw_entry(screen, self.input_box, text, WHITE)
+            draw_entry(screen, self.input_box, name_text, WHITE)
 
         else:
-            draw_entry(screen, self.input_box, text, GRAY)
+            draw_entry(screen, self.input_box, text_i, WHITE)
 
         pg.display.update()
 
@@ -94,6 +94,7 @@ class Game(object):
     b_back = None
     background = ["nebula1.png", "nebula2.png", "nebula3.png"]
     songs = ["susp1.mp3", "susp2.mp3", "susp3.mp3"]
+    sprite_list = []
 
     def __init__(self, level):
         self.BACKGROUND = pg.transform.scale(up_img(self.background[level-1]), (WIDTH, HEIGHT))
@@ -122,3 +123,19 @@ class Game(object):
         draw_button(screen, self.b_back, "Menu")
         pg.display.update()
 
+
+class Player(pygame.sprite.Sprite):
+    frame = 0
+
+    def __init__(self):
+        super().__init__()
+        self.image_list = cargarSprites("tile00")
+        self.image = pygame.image.load(self.image_list[frame]).convert()
+        self.image.set_colorkey(BLACK)
+        self.rect = self.image.get_rect()
+		
+    def update(self):
+        pass
+
+    def next_frame(self):
+        self.frame[]
