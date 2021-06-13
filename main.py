@@ -4,7 +4,7 @@ import clases
 
 pygame.init()
 
-# Módulo principal
+# Módulo principall
 
 
 def main():
@@ -26,6 +26,8 @@ def main():
             screen = clases.Game(2)
         elif screen.change == "Game3":
             screen = clases.Game(3)
+        elif screen.change == "About":
+            screen = clases.About()
 
         screen.run_logic()
         screen.display_frame(VENTANA_PRINCIPAL)
