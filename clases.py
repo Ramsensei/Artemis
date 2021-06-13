@@ -1,7 +1,8 @@
 import pygame as pg
 from pygame.locals import MOUSEBUTTONDOWN
-from funciones import draw_button, up_img, WIDTH, HEIGHT, play_song
-
+from funciones import *
+text = ''
+ACTIVE = False
 
 class Menu(object):
     name = "Menu"
@@ -15,14 +16,19 @@ class Menu(object):
         self.BACKGROUND = pg.transform.scale(up_img("background.png"), (WIDTH, HEIGHT))
         self.artemis_img = pg.transform.scale(up_img("artemis.png"), (300, 300))
 
-        self.b_play = pg.Rect(300 - 125, 350, 250, 85)
-        self.b_nivel1 = pg.Rect(50, 475, 150, 75)
-        self.b_nivel2 = pg.Rect(225, 475, 150, 75)
-        self.b_nivel3 = pg.Rect(400, 475, 150, 75)
+        self.b_play = pg.Rect(300 - 125, 450, 250, 85)
+        self.b_nivel1 = pg.Rect(50, 575, 150, 75)
+        self.b_nivel2 = pg.Rect(225, 575, 150, 75)
+        self.b_nivel3 = pg.Rect(400, 575, 150, 75)
+
+        self.input_box =pg.Rect(100, 370, 400, 50)
 
         play_song("Avengers.mp3")
 
     def process_events(self):
+
+        global ACTIVE, text
+
         for event in pg.event.get():
 
             if event.type == pg.QUIT:
@@ -41,6 +47,24 @@ class Menu(object):
 
                 if self.b_nivel3.collidepoint(pg.mouse.get_pos()):
                     self.change = "Game3"
+
+                if self.input_box.collidepoint(event.pos):
+                    ACTIVE = True
+
+                else:
+                    ACTIVE = False
+
+            if event.type == pg.KEYDOWN:
+
+                if ACTIVE:
+
+                    if event.key == pg.K_BACKSPACE:
+                        text = text[:-1]
+
+                    else:
+                        text += event.unicode
+
+                    
         return True
 
     def run_logic(self):
@@ -53,6 +77,14 @@ class Menu(object):
         draw_button(screen, self.b_nivel1, "Nivel 1")
         draw_button(screen, self.b_nivel2, "Nivel 2")
         draw_button(screen, self.b_nivel3, "Nivel 3")
+        draw_text(screen, "Ingrese su nombre", WHITE, 150, 320)
+
+        if ACTIVE:
+            draw_entry(screen, self.input_box, text, WHITE)
+
+        else:
+            draw_entry(screen, self.input_box, text, GRAY)
+
         pg.display.update()
 
 
