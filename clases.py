@@ -1,4 +1,5 @@
 import pygame as pg
+import time
 from pygame.locals import MOUSEBUTTONDOWN
 import funciones as fc
 
@@ -88,16 +89,25 @@ class Game(object):
     name = "Game1"
     b_back = None
     player = None
+    level = 0
+    time_init = 0
+    time_end = 0
     background = ["nebula1.png", "nebula2.png", "nebula3.png"]
     songs = ["susp1.mp3", "susp2.mp3", "susp3.mp3"]
     sprite = []
 
     def __init__(self, level):
         self.BACKGROUND = pg.transform.scale(fc.up_img(self.background[level - 1]), (fc.WIDTH, fc.HEIGHT))
-        self.sprites = pg.sprite.Group()
+
         self.b_back = pg.Rect(450, 0, 150, 75)
+
+        self.time_init = time.time()
+        self.level = level
         self.player = Player()
+
+        self.sprites = pg.sprite.Group()
         self.sprites.add(self.player)
+
         fc.play_song(self.songs[level - 1])
 
     def process_events(self):
@@ -134,6 +144,10 @@ class Game(object):
 
     def run_logic(self):
         self.sprites.update()
+        self.time_end = time.time()
+        if self.time_end - self.time_init >= 1:
+            self.time_init = time.time()
+            fc.SCORE += 1
 
     def display_frame(self, screen):
         screen.blit(self.BACKGROUND, (0, 0))
