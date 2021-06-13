@@ -17,13 +17,12 @@ SCORE = 0
 SPEED = 5
 text_i = 'Ingrese su Nombre'
 name_text = ''
-info = ("Costa Rica\nInstituto Tecnológico de Costa Rica"+
-"\nIngeniería en computadores\nTaller de Programación\nGrupo 02\nI Semestre 2021"+
-"\nProf: Milton Villegas Lemus\nVersión: Artemis 1.0\nAutores: " +
-"\nValesska Blanco Montoya & "+
-"\nDarío Gutiérrez Rodríguez")
+info = ("Costa Rica\nInstituto Tecnológico de Costa Rica" +
+        "\nIngeniería en computadores\nTaller de Programación\nGrupo 02\nI Semestre 2021" +
+        "\nProf: Milton Villegas Lemus\nVersión: Artemis 1.0\nAutores: " +
+        "\nValesska Blanco Montoya & " +
+        "\nDarío Gutiérrez Rodríguez")
 about = info.split('\n')
-
 
 
 # Funciones para cargar archivos
@@ -38,7 +37,7 @@ def up_img(name):
 # Funciones para cargar varias imágenes y animar
 
 def cargarVariasImg(inputx, listaResultado):
-    if inputx == []:
+    if not inputx:
 
         return listaResultado
 
@@ -103,15 +102,14 @@ def draw_text(text, color, x, y, screen=VENTANA_PRINCIPAL):
     txt = FUENTE.render(text, True, color)
     screen.blit(txt, (x, y))
 
-def draw_text_lines(list_text, color, x, y, screen=VENTANA_PRINCIPAL):
 
-    if list_text == []:
+def draw_text_lines(list_text, color, x, y, screen=VENTANA_PRINCIPAL):
+    if not list_text:
         return
     else:
         txt = FUENTE.render(list_text[0], True, color)
         screen.blit(txt, (x, y))
-        return draw_text_lines(list_text[1:], color, x, y+40)
-
+        return draw_text_lines(list_text[1:], color, x, y + 40)
 
 
 # Función de ordenamiento
@@ -122,17 +120,17 @@ def quick_sort(array):
     greater = []  # Lista con números mayores al pivote
 
     if len(array) > 1:  # Condición de Terminación
-        pivot = array[0]
+        pivot = array[0][0]
 
         # Se realizan las listas
         def do_lists(x):
             if x >= len(array):
                 return
-            elif array[x] < pivot:
+            elif array[x][0] < pivot:
                 less.append(array[x])
-            elif array[x] == pivot:
+            elif array[x][0] == pivot:
                 equal.append(array[x])
-            elif array[x] > pivot:
+            elif array[x][0] > pivot:
                 greater.append(array[x])
             x += 1
             do_lists(x)
@@ -140,6 +138,46 @@ def quick_sort(array):
         do_lists(0)
 
         # Lamada recursiva final
-        return quick_sort(less) + equal + quick_sort(greater)
+        return quick_sort(greater) + equal + quick_sort(less)
     else:
         return array
+
+
+def update_rank():
+    file = open("BestScores.artemis", "rt")
+    text = file.read()
+    file.close()
+
+    rank = 0
+
+    # Create the new entry to Best Scores
+    str_score = "0" * (3 - len(str(SCORE))) + str(SCORE)
+    new = name_text + " " * (30 - len(name_text)) + str_score + "\n"
+    text += new
+
+    # Create the tuples (score, name)
+    lines = text.split("\n")  # Split the lines in text
+    score_tuples = []
+
+    for line in lines:
+        if line:
+            score_tuples += [(line[30:], line[:30])]  # Do the tuples
+
+    lines = quick_sort(score_tuples)  # Sort Scores
+    text = ""  # Init to do a new text
+
+    if len(lines) > 10:  # Limit the top to 10
+        lines = lines[:10]
+
+    # Pre-output process
+    for line in lines:
+        text += line[1] + line[0] + "\n"  # Transforms the tuples to text
+        if line[0] == str_score:
+            rank = lines.index(line) + 1  # Player Position
+
+    print(rank)
+
+    file = open("BestScores.artemis", "wt")
+    file.write(text)
+    file.close()
+    return rank
