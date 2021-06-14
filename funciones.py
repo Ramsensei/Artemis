@@ -24,6 +24,8 @@ info = ("Costa Rica\nInstituto Tecnológico de Costa Rica"+
 "\nDarío Gutiérrez Rodríguez")
 about = info.split('\n')
 
+player_coords = (0,0)
+player_life = 3
 
 
 # Funciones para cargar archivos
@@ -69,6 +71,10 @@ def play_song(MP3):
     pygame.mixer.music.load(load_MP3(MP3))
     pygame.mixer.music.play(-1)
 
+def play_fx():
+
+    fx = pygame.mixer.Sound("explosion.mp3")
+    fx.play()
 
 def stop_song():
     if pygame.mixer.music.get_busy():

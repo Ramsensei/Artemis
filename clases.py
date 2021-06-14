@@ -1,5 +1,6 @@
 import pygame as pg
 import time
+import random
 from pygame.locals import MOUSEBUTTONDOWN
 import funciones as fc
 
@@ -133,6 +134,7 @@ class Game(object):
     name = "Game1"
     b_back = None
     player = None
+    meteorito = None
     level = 0
     time_init = 0
     time_end = 0
@@ -152,7 +154,15 @@ class Game(object):
         self.sprites = pg.sprite.Group()
         self.sprites.add(self.player)
 
+        self.meteoritos = pg.sprite.Group()
+
+        for x in range((level + 1) * 2):
+            self.meteorito = Meteoritos()
+            self.meteoritos.add(self.meteorito)
+
         fc.play_song(self.songs[level - 1])
+
+        fc.player_life = 3
 
     def process_events(self):
         for event in pg.event.get():
@@ -188,6 +198,7 @@ class Game(object):
 
     def run_logic(self):
         self.sprites.update()
+        self.meteoritos.update()
         self.time_end = time.time()
         if self.time_end - self.time_init >= 1:
             self.time_init = time.time()
@@ -202,9 +213,11 @@ class Game(object):
         screen.blit(self.BACKGROUND, (0, 0))
         fc.draw_button(screen, self.b_back, "Menu")
         fc.draw_text("Score: " + str(fc.SCORE), fc.WHITE, 10, 30)
-        fc.draw_text("Jugador: " + fc.name_text, fc.WHITE, 100, 30)
+        fc.draw_text("Jugador: " + fc.name_text, fc.WHITE, 110, 30)
+        fc.draw_text("Vida: " + str(fc.player_life), fc.WHITE, 320, 30)
         self.player.next_frame()
         self.sprites.draw(screen)
+        self.meteoritos.draw(screen)
         pg.display.update()
 
 
@@ -234,6 +247,7 @@ class Player(pg.sprite.Sprite):
             self.rect.y = 0
         if self.rect.y > 684:
             self.rect.y = 684
+        fc.player_coords = (self.rect.x, self.rect.y)
 
     def next_frame(self):
         if self.frame[1]:
@@ -248,3 +262,66 @@ class Player(pg.sprite.Sprite):
             self.frame[1] = True
         self.image = self.image_list[self.frame[0]]
         self.image.set_colorkey(fc.BLACK)
+
+
+class Meteoritos(pg.sprite.Sprite):
+    speed = 4
+    medium = 50
+    movx = True
+    movy = True
+
+    def __init__(self):
+
+        super().__init__()
+
+        self.image = pg.transform.scale(fc.up_img("meteorito.png"), (self.medium,self.medium))
+        self.image.set_colorkey(fc.BLACK)
+        self.radius = 25
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randrange(fc.WIDTH - self.rect.width)
+        self.rect.y = random.randrange(fc.HEIGHT/2)
+
+    def update(self):
+
+        if self.rect:
+
+            if (self.rect.x < fc.player_coords[0] + 139
+                and self.rect.x + self.rect.width > fc.player_coords[0]
+                and self.rect.y < fc.player_coords[1] + 116
+                and self.rect.y + self.rect.height > fc.player_coords[1]):
+
+                fc.player_life -= 1
+                fc.play_fx()
+                self.kill()
+
+            if self.rect:
+
+                if self.movx == True and (self.rect.x + (2*self.radius) >= fc.WIDTH):
+                    self.movx = False
+                
+                if self.movx == False and (self.rect.x <= 0):
+                    self.movx = True
+
+                if self.movy == True and (self.rect.y + (2*self.radius) >= fc.HEIGHT):
+                    self.movy = False
+
+                if self.movy == False and (self.rect.y <= 0):
+                    self.movy = True
+                
+                if self.movx == True:
+                    self.rect.x += self.speed
+
+                elif self.movx == False:
+                    self.rect.x -= self.speed
+
+                if self.movy == True:
+                    self.rect.y += self.speed
+
+                elif self.movy == False:
+                    self.rect.y -= self.speed
+
+
+
+
+            
+
