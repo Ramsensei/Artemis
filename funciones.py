@@ -72,8 +72,8 @@ def play_song(MP3):
 
 def play_fx():
 
-    fx = pygame.mixer.Sound("explosion.mp3")
-    fx.play()
+    fx = pygame.mixer.Sound("assets\\explosion.wav")
+    pygame.mixer.Sound.play(fx)
 
 def stop_song():
     if pygame.mixer.music.get_busy():
