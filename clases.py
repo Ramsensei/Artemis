@@ -45,24 +45,29 @@ class Menu(object):
 
                 if self.b_play.collidepoint(pg.mouse.get_pos()):
                     self.change = "Game1"
+                    if not fc.name_text:
+                        fc.name_text = "Anonymous"  # Default name
 
                 if self.b_nivel1.collidepoint(pg.mouse.get_pos()):
                     self.change = "Game1"
+                    if not fc.name_text:
+                        fc.name_text = "Anonymous"  # Default name
 
                 if self.b_nivel2.collidepoint(pg.mouse.get_pos()):
                     self.change = "Game2"
+                    if not fc.name_text:
+                        fc.name_text = "Anonymous"  # Default name
 
                 if self.b_nivel3.collidepoint(pg.mouse.get_pos()):
                     self.change = "Game3"
+                    if not fc.name_text:
+                        fc.name_text = "Anonymous"  # Default name
 
                 if self.b_about.collidepoint(pg.mouse.get_pos()):
                     self.change = "About"
 
                 if self.input_box.collidepoint(event.pos):
                     self.Active = True
-
-                if not fc.name_text:
-                    fc.name_text = "Anonymous"  # Default name
 
             if event.type == pg.KEYDOWN:
 
@@ -247,12 +252,12 @@ class Player(pg.sprite.Sprite):
         self.rect.y += self.speedy
         if self.rect.x < 0:
             self.rect.x = 0
-        if self.rect.x > 461:
-            self.rect.x = 461
+        if self.rect.x > 600 - self.rect.width:
+            self.rect.x = 600 - self.rect.width
         if self.rect.y < 0:
             self.rect.y = 0
-        if self.rect.y > 684:
-            self.rect.y = 684
+        if self.rect.y > 800 - self.rect.height:
+            self.rect.y = 800 - self.rect.height
         fc.player_coords = (self.rect.x, self.rect.y)
 
     def next_frame(self):
@@ -280,7 +285,7 @@ class Meteoritos(pg.sprite.Sprite):
 
         super().__init__()
 
-        self.image = pg.transform.scale(fc.up_img("meteorito.png"), (self.medium,self.medium))
+        self.image = pg.transform.scale(fc.up_img("meteorito.png"), (self.medium, self.medium))
         self.image.set_colorkey(fc.BLACK)
         self.radius = 25
         self.rect = self.image.get_rect()
@@ -292,32 +297,31 @@ class Meteoritos(pg.sprite.Sprite):
         if self.rect:
 
             if (self.rect.x < fc.player_coords[0] + 139
-                and self.rect.x + self.rect.width > fc.player_coords[0]
-                and self.rect.y < fc.player_coords[1] + 116
-                and self.rect.y + self.rect.height > fc.player_coords[1]):
-
+                    and self.rect.x + self.rect.width > fc.player_coords[0]
+                    and self.rect.y < fc.player_coords[1] + 116
+                    and self.rect.y + self.rect.height > fc.player_coords[1]):
                 fc.player_life -= 1
                 fc.play_fx()
                 self.kill()
 
             if self.rect:
 
-                if self.movx == True and (self.rect.x + (2*self.radius) >= fc.WIDTH):
+                if self.movx == True and (self.rect.x + (2 * self.radius) >= fc.WIDTH):
                     self.movx = False
                     fc.play_fx()
-                
+
                 if self.movx == False and (self.rect.x <= 0):
                     self.movx = True
                     fc.play_fx()
 
-                if self.movy == True and (self.rect.y + (2*self.radius) >= fc.HEIGHT):
+                if self.movy == True and (self.rect.y + (2 * self.radius) >= fc.HEIGHT):
                     self.movy = False
                     fc.play_fx()
 
                 if self.movy == False and (self.rect.y <= 0):
                     self.movy = True
                     fc.play_fx()
-                
+
                 if self.movx == True:
                     self.rect.x += self.speed
 
@@ -329,9 +333,3 @@ class Meteoritos(pg.sprite.Sprite):
 
                 elif self.movy == False:
                     self.rect.y -= self.speed
-
-
-
-
-            
-
