@@ -61,6 +61,9 @@ class Menu(object):
                 if self.input_box.collidepoint(event.pos):
                     self.Active = True
 
+                if not fc.name_text:
+                    fc.name_text = "Anonymous"  # Default name
+
             if event.type == pg.KEYDOWN:
 
                 if self.Active:
@@ -93,6 +96,7 @@ class Menu(object):
             fc.draw_entry(screen, self.input_box, fc.text_i, fc.WHITE)
 
         pg.display.update()
+
 
 class About(object):
     change = "No"
@@ -128,6 +132,7 @@ class About(object):
         fc.draw_button(screen, self.b_back, "Menu")
         fc.draw_text_lines(fc.about, fc.WHITE, 70, 100)
         pg.display.update()
+
 
 class Game(object):
     change = "No"
@@ -194,6 +199,7 @@ class Game(object):
 
                 if self.b_back.collidepoint(pg.mouse.get_pos()):
                     self.change = "Menu"
+                    fc.update_rank()
         return True
 
     def run_logic(self):
