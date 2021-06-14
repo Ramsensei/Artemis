@@ -252,7 +252,7 @@ class Player(pg.sprite.Sprite):
         self.image = self.image_list[self.frame[0]]
         self.image.set_colorkey(fc.BLACK)
         self.rect = self.image.get_rect()
-        self.rect.x, self.rect.y = fc.player_coords
+        self.rect.x, self.rect.y = 240, 500
 
     def update(self):
         self.rect.x += self.speedx
@@ -283,7 +283,8 @@ class Player(pg.sprite.Sprite):
 
 
 class Meteoritos(pg.sprite.Sprite):
-    speed = 4
+    speed = (4, 4)
+    speedrange = (1, 7)
     medium = 50
     movx = True
     movy = True
@@ -296,47 +297,54 @@ class Meteoritos(pg.sprite.Sprite):
         self.image.set_colorkey(fc.BLACK)
         self.radius = 25
         self.rect = self.image.get_rect()
-        self.rect.x = -1
-        self.rect.y = random.randrange(300)
+        self.rect.x = random.choice([-100, 700])
+        self.rect.y = random.randrange(600)
+        self.speed = random.randrange(self.speedrange[0], self.speedrange[1]), random.randrange(self.speedrange[0],
+                                                                                                self.speedrange[1])
 
     def update(self):
 
-        if self.rect:
+        if (self.rect.x < fc.player_coords[0] + 85
+                and self.rect.x + self.rect.width > fc.player_coords[0]
+                and self.rect.y < fc.player_coords[1] + 80
+                and self.rect.y + self.rect.height > fc.player_coords[1]):
+            fc.player_life -= 1
+            fc.play_fx()
+            self.kill()
+            return
 
-            if (self.rect.x < fc.player_coords[0] + 139
-                    and self.rect.x + self.rect.width > fc.player_coords[0]
-                    and self.rect.y < fc.player_coords[1] + 116
-                    and self.rect.y + self.rect.height > fc.player_coords[1]):
-                fc.player_life -= 1
-                fc.play_fx()
-                self.kill()
+        if self.movx and (self.rect.x + (2 * self.radius) >= fc.WIDTH):
+            self.movx = False
+            self.speed = random.randrange(self.speedrange[0], self.speedrange[1]), random.randrange(self.speedrange[0],
+                                                                                                    self.speedrange[1])
+            fc.play_fx()
 
-            if self.rect:
+        if not self.movx and (self.rect.x <= 0):
+            self.movx = True
+            self.speed = random.randrange(self.speedrange[0], self.speedrange[1]), random.randrange(self.speedrange[0],
+                                                                                                    self.speedrange[1])
+            fc.play_fx()
 
-                if self.movx and (self.rect.x + (2 * self.radius) >= fc.WIDTH):
-                    self.movx = False
-                    fc.play_fx()
+        if self.movy and (self.rect.y + (2 * self.radius) >= fc.HEIGHT):
+            self.movy = False
+            self.speed = random.randrange(self.speedrange[0], self.speedrange[1]), random.randrange(self.speedrange[0],
+                                                                                                    self.speedrange[1])
+            fc.play_fx()
 
-                if not self.movx and (self.rect.x <= 0):
-                    self.movx = True
-                    fc.play_fx()
+        if not self.movy and (self.rect.y <= 0):
+            self.movy = True
+            self.speed = random.randrange(self.speedrange[0], self.speedrange[1]), random.randrange(self.speedrange[0],
+                                                                                                    self.speedrange[1])
+            fc.play_fx()
 
-                if self.movy and (self.rect.y + (2 * self.radius) >= fc.HEIGHT):
-                    self.movy = False
-                    fc.play_fx()
+        if self.movx:
+            self.rect.x += self.speed[0]
 
-                if not self.movy and (self.rect.y <= 0):
-                    self.movy = True
-                    fc.play_fx()
+        elif not self.movx:
+            self.rect.x -= self.speed[0]
 
-                if self.movx:
-                    self.rect.x += self.speed
+        if self.movy:
+            self.rect.y += self.speed[1]
 
-                elif not self.movx:
-                    self.rect.x -= self.speed
-
-                if self.movy:
-                    self.rect.y += self.speed
-
-                elif not self.movy:
-                    self.rect.y -= self.speed
+        elif not self.movy:
+            self.rect.y -= self.speed[1]
