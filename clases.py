@@ -147,7 +147,8 @@ class Game(object):
     meteorito = None
     level = 0
     time_init = 0
-    time_end = 0
+    time_score = 0
+    timer = 0
     background = ["nebula1.png", "nebula2.png", "nebula3.png"]
     songs = ["susp1.mp3", "susp2.mp3", "susp3.mp3"]
     sprite = []
@@ -210,15 +211,22 @@ class Game(object):
     def run_logic(self):
         self.sprites.update()
         self.meteoritos.update()
-        self.time_end = time.time()
-        if self.time_end - self.time_init >= 1:
-            self.time_init = time.time()
+        self.timer = time.time()
+        if self.timer - self.time_score >= 1:
+            self.time_score = time.time()
             if self.level == 1:
                 fc.SCORE += 1
             if self.level == 2:
                 fc.SCORE += 3
             if self.level == 3:
                 fc.SCORE += 5
+        if self.timer - self.time_init >= 60:
+            if self.level == 1:
+                self.change = "Game2"
+            if self.level == 2:
+                self.change = "Game3"
+            if self.level == 3:
+                self.change = "GameOver"
 
     def display_frame(self, screen):
         screen.blit(self.BACKGROUND, (0, 0))
@@ -244,8 +252,7 @@ class Player(pg.sprite.Sprite):
         self.image = self.image_list[self.frame[0]]
         self.image.set_colorkey(fc.BLACK)
         self.rect = self.image.get_rect()
-        self.rect.x = 240
-        self.rect.y = 500
+        self.rect.x, self.rect.y = fc.player_coords
 
     def update(self):
         self.rect.x += self.speedx
@@ -289,7 +296,7 @@ class Meteoritos(pg.sprite.Sprite):
         self.image.set_colorkey(fc.BLACK)
         self.radius = 25
         self.rect = self.image.get_rect()
-        self.rect.x = random.randrange(fc.WIDTH - self.rect.width)
+        self.rect.x = -1
         self.rect.y = random.randrange(300)
 
     def update(self):
@@ -306,30 +313,30 @@ class Meteoritos(pg.sprite.Sprite):
 
             if self.rect:
 
-                if self.movx == True and (self.rect.x + (2 * self.radius) >= fc.WIDTH):
+                if self.movx and (self.rect.x + (2 * self.radius) >= fc.WIDTH):
                     self.movx = False
                     fc.play_fx()
 
-                if self.movx == False and (self.rect.x <= 0):
+                if not self.movx and (self.rect.x <= 0):
                     self.movx = True
                     fc.play_fx()
 
-                if self.movy == True and (self.rect.y + (2 * self.radius) >= fc.HEIGHT):
+                if self.movy and (self.rect.y + (2 * self.radius) >= fc.HEIGHT):
                     self.movy = False
                     fc.play_fx()
 
-                if self.movy == False and (self.rect.y <= 0):
+                if not self.movy and (self.rect.y <= 0):
                     self.movy = True
                     fc.play_fx()
 
-                if self.movx == True:
+                if self.movx:
                     self.rect.x += self.speed
 
-                elif self.movx == False:
+                elif not self.movx:
                     self.rect.x -= self.speed
 
-                if self.movy == True:
+                if self.movy:
                     self.rect.y += self.speed
 
-                elif self.movy == False:
+                elif not self.movy:
                     self.rect.y -= self.speed
