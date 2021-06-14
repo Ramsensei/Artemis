@@ -15,7 +15,7 @@ GRAY = (64, 64, 64)
 FUENTE = pygame.font.SysFont("Times New Roman", 24)
 SCORE = 0
 SPEED = 5
-text_i = 'Ingrese su Nombre'
+text_i = 'Ingrese Su Nombre'
 name_text = ''
 info = ("Costa Rica\nInstituto Tecnológico de Costa Rica" +
         "\nIngeniería en computadores\nTaller de Programación\nGrupo 02\nI Semestre 2021" +
