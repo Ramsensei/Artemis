@@ -177,23 +177,23 @@ class Game(object):
 
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_LEFT:
-                    self.player.speedx -= 3
+                    self.player.speedx -= 5
                 if event.key == pg.K_RIGHT:
-                    self.player.speedx += 3
+                    self.player.speedx += 5
                 if event.key == pg.K_UP:
-                    self.player.speedy -= 3
+                    self.player.speedy -= 5
                 if event.key == pg.K_DOWN:
-                    self.player.speedy += 3
+                    self.player.speedy += 5
 
             if event.type == pg.KEYUP:
                 if event.key == pg.K_LEFT:
-                    self.player.speedx += 3
+                    self.player.speedx += 5
                 if event.key == pg.K_RIGHT:
-                    self.player.speedx -= 3
+                    self.player.speedx -= 5
                 if event.key == pg.K_UP:
-                    self.player.speedy += 3
+                    self.player.speedy += 5
                 if event.key == pg.K_DOWN:
-                    self.player.speedy -= 3
+                    self.player.speedy -= 5
 
             if event.type == MOUSEBUTTONDOWN and event.button == 1:
 
@@ -285,7 +285,7 @@ class Meteoritos(pg.sprite.Sprite):
         self.radius = 25
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(fc.WIDTH - self.rect.width)
-        self.rect.y = random.randrange(fc.HEIGHT/2)
+        self.rect.y = random.randrange(300)
 
     def update(self):
 
@@ -304,15 +304,19 @@ class Meteoritos(pg.sprite.Sprite):
 
                 if self.movx == True and (self.rect.x + (2*self.radius) >= fc.WIDTH):
                     self.movx = False
+                    fc.play_fx()
                 
                 if self.movx == False and (self.rect.x <= 0):
                     self.movx = True
+                    fc.play_fx()
 
                 if self.movy == True and (self.rect.y + (2*self.radius) >= fc.HEIGHT):
                     self.movy = False
+                    fc.play_fx()
 
                 if self.movy == False and (self.rect.y <= 0):
                     self.movy = True
+                    fc.play_fx()
                 
                 if self.movx == True:
                     self.rect.x += self.speed
