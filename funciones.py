@@ -24,7 +24,7 @@ info = ("Costa Rica\nInstituto Tecnológico de Costa Rica" +
         "\nDarío Gutiérrez Rodríguez")
 about = info.split('\n')
 
-player_coords = (0,0)
+player_coords = (240, 500)
 player_life = 3
 
 # Funciones para cargar archivos
