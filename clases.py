@@ -315,7 +315,7 @@ class Game(object):
                 fc.SCORE += 3
             if self.level == 3:
                 fc.SCORE += 5
-        if self.timer - self.time_init >= 30:
+        if self.timer - self.time_init >= 60:
             if self.level == 1:
                 self.change = "Game2"
             if self.level == 2:
