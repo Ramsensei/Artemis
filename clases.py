@@ -141,6 +141,7 @@ class About(object):
         fc.draw_text_lines(fc.about, fc.WHITE, 70, 100)
         pg.display.update()
 
+
 class Top(object):
     change = "No"
     name = "Top"
@@ -173,11 +174,12 @@ class Top(object):
 
         screen.blit(self.BACKGROUND, (0, 0))
         fc.draw_button(screen, self.b_back, "Menu")
-        with open ("BestScores.artemis", "r") as file:
+        with open("BestScores.artemis", "r") as file:
             lista_top10 = file.readlines()
         fc.draw_text("Top 10", fc.WHITE, 70, 50)
         fc.draw_text_lines(lista_top10, fc.WHITE, 70, 150)
         pg.display.update()
+
 
 class GameOver(object):
     change = "No"
@@ -189,6 +191,7 @@ class GameOver(object):
         self.BACKGROUND = pg.transform.scale(fc.up_img("background.png"), (fc.WIDTH, fc.HEIGHT))
         self.b_back = pg.Rect(450, 0, 150, 75)
 
+        fc.update_rank()
         fc.play_song("Avengers.mp3")
 
     def process_events(self):
@@ -211,13 +214,15 @@ class GameOver(object):
 
         screen.blit(self.BACKGROUND, (0, 0))
         fc.draw_button(screen, self.b_back, "Menu")
-        fc.draw_text("Ha finalizado el juego", fc.WHITE, 190, 400)
+        fc.draw_text("Ha finalizado el juego", fc.WHITE, 190, 350)
+        fc.draw_text("Su puntaje es de: {x}".format(x=fc.SCORE), fc.WHITE, 190, 400)
         if fc.posicion != 0:
-            fc.draw_text("Obtuvo la posición #"+str(fc.posicion)+
+            fc.draw_text("Obtuvo la posición #" + str(fc.posicion) +
                          " en el Top 10", fc.WHITE, 140, 450)
         else:
             fc.draw_text("No entró en el top 10", fc.WHITE, 195, 450)
         pg.display.update()
+
 
 class Game(object):
     change = "No"
