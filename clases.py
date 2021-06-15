@@ -238,6 +238,10 @@ class Game(object):
             if self.level == 3:
                 self.change = "GameOver"
 
+        elif fc.player_life <= 0:
+            self.change = "Game Over"
+            print("Perdió")
+
     def display_frame(self, screen):
         screen.blit(self.BACKGROUND, (0, 0))
         fc.draw_button(screen, self.b_back, "Menu")
