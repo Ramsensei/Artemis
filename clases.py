@@ -63,6 +63,9 @@ class Menu(object):
                     if not fc.name_text:
                         fc.name_text = "Anonymous"  # Default name
 
+                if self.b_top.collidepoint(pg.mouse.get_pos()):
+                    self.change = "Top"
+
                 if self.b_about.collidepoint(pg.mouse.get_pos()):
                     self.change = "About"
 
@@ -138,6 +141,83 @@ class About(object):
         fc.draw_text_lines(fc.about, fc.WHITE, 70, 100)
         pg.display.update()
 
+class Top(object):
+    change = "No"
+    name = "Top"
+    b_back = None
+
+    def __init__(self):
+
+        self.BACKGROUND = pg.transform.scale(fc.up_img("background.png"), (fc.WIDTH, fc.HEIGHT))
+        self.b_back = pg.Rect(450, 0, 150, 75)
+
+        fc.play_song("Avengers.mp3")
+
+    def process_events(self):
+        for event in pg.event.get():
+
+            if event.type == pg.QUIT:
+                return False
+
+            if event.type == MOUSEBUTTONDOWN and event.button == 1:
+
+                if self.b_back.collidepoint(pg.mouse.get_pos()):
+                    self.change = "Menu"
+
+        return True
+
+    def run_logic(self):
+        pass
+
+    def display_frame(self, screen):
+
+        screen.blit(self.BACKGROUND, (0, 0))
+        fc.draw_button(screen, self.b_back, "Menu")
+        with open ("BestScores.artemis", "r") as file:
+            lista_top10 = file.readlines()
+        fc.draw_text("Top 10", fc.WHITE, 70, 50)
+        fc.draw_text_lines(lista_top10, fc.WHITE, 70, 150)
+        pg.display.update()
+
+class GameOver(object):
+    change = "No"
+    name = "GameOver"
+    b_back = None
+
+    def __init__(self):
+
+        self.BACKGROUND = pg.transform.scale(fc.up_img("background.png"), (fc.WIDTH, fc.HEIGHT))
+        self.b_back = pg.Rect(450, 0, 150, 75)
+
+        fc.play_song("Avengers.mp3")
+
+    def process_events(self):
+        for event in pg.event.get():
+
+            if event.type == pg.QUIT:
+                return False
+
+            if event.type == MOUSEBUTTONDOWN and event.button == 1:
+
+                if self.b_back.collidepoint(pg.mouse.get_pos()):
+                    self.change = "Menu"
+
+        return True
+
+    def run_logic(self):
+        pass
+
+    def display_frame(self, screen):
+
+        screen.blit(self.BACKGROUND, (0, 0))
+        fc.draw_button(screen, self.b_back, "Menu")
+        fc.draw_text("Ha finalizado el juego", fc.WHITE, 190, 400)
+        if fc.posicion != 0:
+            fc.draw_text("Obtuvo la posición #"+str(fc.posicion)+
+                         " en el Top 10", fc.WHITE, 140, 450)
+        else:
+            fc.draw_text("No entró en el top 10", fc.WHITE, 195, 450)
+        pg.display.update()
 
 class Game(object):
     change = "No"
@@ -173,7 +253,7 @@ class Game(object):
 
         self.meteoritos = pg.sprite.Group()
 
-        for x in range((level + 1) * 2):
+        for x in range(level * 3):
             self.meteorito = Meteoritos()
             self.meteoritos.add(self.meteorito)
 
@@ -230,23 +310,27 @@ class Game(object):
                 fc.SCORE += 3
             if self.level == 3:
                 fc.SCORE += 5
-        if self.timer - self.time_init >= 10:
+        if self.timer - self.time_init >= 60:
             if self.level == 1:
                 self.change = "Game2"
             if self.level == 2:
                 self.change = "Game3"
             if self.level == 3:
+                fc.update_rank()
                 self.change = "GameOver"
 
-        elif fc.player_life <= 0:
-            self.change = "Game Over"
-            print("Perdió")
+        elif fc.player_life <= 0 and self.level == 3:
+            fc.update_rank()
+            self.change = "GameOver"
+
+        elif fc.player_life <= 0 and (self.level == 1 or self.level == 2):
+            self.change = "GameOver"
 
     def display_frame(self, screen):
         screen.blit(self.BACKGROUND, (0, 0))
         fc.draw_button(screen, self.b_back, "Menu")
         fc.draw_text("Score: " + str(fc.SCORE), fc.WHITE, 10, 30)
-        fc.draw_text("Jugador: " + fc.name_text, fc.WHITE, 110, 30)
+        fc.draw_text("Jugador: " + fc.name_text, fc.WHITE, 140, 30)
         fc.draw_text("Vida: " + str(fc.player_life), fc.WHITE, 320, 30)
         self.player.next_frame()
         self.sprites.draw(screen)

@@ -28,6 +28,10 @@ def main():
             screen = clases.Game(3)
         elif screen.change == "About":
             screen = clases.About()
+        elif screen.change == "Top":
+            screen = clases.Top()
+        elif screen.change == "GameOver":
+            screen = clases.GameOver()
 
         screen.run_logic()
         screen.display_frame(VENTANA_PRINCIPAL)
