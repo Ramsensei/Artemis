@@ -27,6 +27,7 @@ about = info.split('\n')
 player_coords = (240, 500)
 player_life = 3
 
+
 # Funciones para cargar archivos
 
 def up_img(name):
@@ -70,10 +71,11 @@ def play_song(MP3):
     pygame.mixer.music.load(load_MP3(MP3))
     pygame.mixer.music.play(-1)
 
-def play_fx():
 
+def play_fx():
     fx = pygame.mixer.Sound("assets\\explosion.wav")
     pygame.mixer.Sound.play(fx)
+
 
 def stop_song():
     if pygame.mixer.music.get_busy():

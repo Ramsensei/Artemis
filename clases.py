@@ -152,6 +152,8 @@ class Game(object):
     background = ["nebula1.png", "nebula2.png", "nebula3.png"]
     songs = ["susp1.mp3", "susp2.mp3", "susp3.mp3"]
     sprite = []
+    plySpeed = 0
+    key_pressed = [False, False, False, False]
 
     def __init__(self, level):
         self.BACKGROUND = pg.transform.scale(fc.up_img(self.background[level - 1]), (fc.WIDTH, fc.HEIGHT))
@@ -161,6 +163,10 @@ class Game(object):
         self.time_init = time.time()
         self.level = level
         self.player = Player()
+        self.plySpeed = 5
+        self.player.speedx = 0
+        self.player.speedy = 0
+        self.key_pressed = [False, False, False, False]
 
         self.sprites = pg.sprite.Group()
         self.sprites.add(self.player)
@@ -183,23 +189,27 @@ class Game(object):
 
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_LEFT:
-                    self.player.speedx -= 5
+                    self.player.speedx -= self.plySpeed
+                    self.key_pressed[0] = True
                 if event.key == pg.K_RIGHT:
-                    self.player.speedx += 5
+                    self.player.speedx += self.plySpeed
+                    self.key_pressed[1] = True
                 if event.key == pg.K_UP:
-                    self.player.speedy -= 5
+                    self.player.speedy -= self.plySpeed
+                    self.key_pressed[2] = True
                 if event.key == pg.K_DOWN:
-                    self.player.speedy += 5
+                    self.player.speedy += self.plySpeed
+                    self.key_pressed[3] = True
 
             if event.type == pg.KEYUP:
-                if event.key == pg.K_LEFT:
-                    self.player.speedx += 5
-                if event.key == pg.K_RIGHT:
-                    self.player.speedx -= 5
-                if event.key == pg.K_UP:
-                    self.player.speedy += 5
-                if event.key == pg.K_DOWN:
-                    self.player.speedy -= 5
+                if event.key == pg.K_LEFT and self.key_pressed[0]:
+                    self.player.speedx += self.plySpeed
+                if event.key == pg.K_RIGHT and self.key_pressed[1]:
+                    self.player.speedx -= self.plySpeed
+                if event.key == pg.K_UP and self.key_pressed[2]:
+                    self.player.speedy += self.plySpeed
+                if event.key == pg.K_DOWN and self.key_pressed[3]:
+                    self.player.speedy -= self.plySpeed
 
             if event.type == MOUSEBUTTONDOWN and event.button == 1:
 
@@ -220,7 +230,7 @@ class Game(object):
                 fc.SCORE += 3
             if self.level == 3:
                 fc.SCORE += 5
-        if self.timer - self.time_init >= 60:
+        if self.timer - self.time_init >= 10:
             if self.level == 1:
                 self.change = "Game2"
             if self.level == 2:
@@ -252,6 +262,7 @@ class Player(pg.sprite.Sprite):
         self.image = self.image_list[self.frame[0]]
         self.image.set_colorkey(fc.BLACK)
         self.rect = self.image.get_rect()
+        self.speedx, self.speedy = 0, 0
         self.rect.x, self.rect.y = 240, 500
 
     def update(self):
