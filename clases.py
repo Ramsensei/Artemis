@@ -258,7 +258,7 @@ class Game(object):
 
         self.meteoritos = pg.sprite.Group()
 
-        for x in range(level * 3):
+        for x in range(level + 3):
             self.meteorito = Meteoritos()
             self.meteoritos.add(self.meteorito)
 
