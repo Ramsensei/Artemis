@@ -14,7 +14,7 @@ def main():
     run = True
 
     screen = clases.Menu()
-
+    print(clases.Menu.__doc__)
     while run:
         run = screen.process_events()
 

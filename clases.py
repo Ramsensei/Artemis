@@ -6,6 +6,9 @@ import funciones as fc
 
 
 class Menu(object):
+    """
+    Hola
+    """
     name = "Menu"
     change = "No"
     b_play = None
@@ -87,6 +90,9 @@ class Menu(object):
 
         return True
 
+    def run_logic(self):
+        pass
+
     def display_frame(self, screen):
         screen.blit(self.BACKGROUND, (0, 0))
         screen.blit(self.artemis_img, (150, 25))
@@ -131,6 +137,9 @@ class About(object):
 
         return True
 
+    def run_logic(self):
+        pass
+
     def display_frame(self, screen):
 
         screen.blit(self.BACKGROUND, (0, 0))
@@ -163,6 +172,9 @@ class Top(object):
                     self.change = "Menu"
 
         return True
+
+    def run_logic(self):
+        pass
 
     def display_frame(self, screen):
 
@@ -200,6 +212,9 @@ class GameOver(object):
                     self.change = "Menu"
 
         return True
+
+    def run_logic(self):
+        pass
 
     def display_frame(self, screen):
 
