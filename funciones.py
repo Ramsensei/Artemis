@@ -1,5 +1,6 @@
 import pygame
 import glob
+import clases
 from os import path
 
 # Inicializando pygame
@@ -214,3 +215,15 @@ def update_rank():
     file.write(text)
     file.close()
     return rank
+
+def mi_auto_doc():
+
+    with open("README.md",'w') as file:
+
+        file.write(clases.Menu.__doc__)
+        file.write(clases.About.__doc__)
+        file.write(clases.Top.__doc__)
+        file.write(clases.GameOver.__doc__)
+        file.write(clases.Game.__doc__)
+        file.write(clases.Player.__doc__)
+        file.write(clases.Meteoritos.__doc__)

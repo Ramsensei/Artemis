@@ -1,20 +1,26 @@
+# Importaciones
 import pygame
+import funciones as fc
 from funciones import FPS, VENTANA_PRINCIPAL
 import clases
 
 pygame.init()
 
+
 # Módulo principall
-
-
 def main():
 
     pygame.display.set_caption("Artemis")
     clock = pygame.time.Clock()
     run = True
 
+    # Definiendo menú principal como primera pantalla
     screen = clases.Menu()
-    print(clases.Menu.__doc__)
+    
+    # Imprimiendo documentación
+    fc.mi_auto_doc()
+
+    # Bucle principal
     while run:
         run = screen.process_events()
 
