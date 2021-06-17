@@ -249,7 +249,7 @@ class Game(object):
 
         self.meteoritos = pg.sprite.Group()
 
-        for x in range(level * 3):
+        for x in range(level + 3):
             self.meteorito = Meteoritos()
             self.meteoritos.add(self.meteorito)
 
@@ -306,7 +306,7 @@ class Game(object):
                 fc.SCORE += 3
             if self.level == 3:
                 fc.SCORE += 5
-        if self.timer - self.time_init >= 60:
+        if self.timer - self.time_init >= 30:
             if self.level == 1:
                 self.change = "Game2"
             if self.level == 2:
@@ -327,7 +327,9 @@ class Game(object):
         fc.draw_button(screen, self.b_back, "Menu")
         fc.draw_text("Score: " + str(fc.SCORE), fc.WHITE, 10, 30)
         fc.draw_text("Jugador: " + fc.name_text, fc.WHITE, 140, 30)
-        fc.draw_text("Vida: " + str(fc.player_life), fc.WHITE, 320, 30)
+        fc.draw_text("Vida: " + str(fc.player_life), fc.WHITE, 350, 30)
+        elapsed_time = int(time.time() - self.time_init)
+        fc.draw_text("Tiempo: "+ str(elapsed_time), fc.WHITE, 10, 750)
         self.player.next_frame()
         self.sprites.draw(screen)
         self.meteoritos.draw(screen)
