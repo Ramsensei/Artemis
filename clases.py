@@ -12,6 +12,9 @@ class Menu(object):
     b_nivel1 = None
     b_nivel2 = None
     b_nivel3 = None
+    b_about = None
+    b_top = None
+    input_box = None
     Active = False
 
     def __init__(self):
@@ -84,9 +87,6 @@ class Menu(object):
 
         return True
 
-    def run_logic(self):
-        pass
-
     def display_frame(self, screen):
         screen.blit(self.BACKGROUND, (0, 0))
         screen.blit(self.artemis_img, (150, 25))
@@ -131,9 +131,6 @@ class About(object):
 
         return True
 
-    def run_logic(self):
-        pass
-
     def display_frame(self, screen):
 
         screen.blit(self.BACKGROUND, (0, 0))
@@ -166,9 +163,6 @@ class Top(object):
                     self.change = "Menu"
 
         return True
-
-    def run_logic(self):
-        pass
 
     def display_frame(self, screen):
 
@@ -207,9 +201,6 @@ class GameOver(object):
 
         return True
 
-    def run_logic(self):
-        pass
-
     def display_frame(self, screen):
 
         screen.blit(self.BACKGROUND, (0, 0))
@@ -226,7 +217,7 @@ class GameOver(object):
 
 class Game(object):
     change = "No"
-    name = "Game1"
+    name = "Game"
     b_back = None
     player = None
     meteorito = None
@@ -236,7 +227,7 @@ class Game(object):
     timer = 0
     background = ["nebula1.png", "nebula2.png", "nebula3.png"]
     songs = ["susp1.mp3", "susp2.mp3", "susp3.mp3"]
-    sprite = []
+    sprites = []
     plySpeed = 0
     key_pressed = [False, False, False, False]
 
@@ -345,6 +336,7 @@ class Game(object):
 
 class Player(pg.sprite.Sprite):
     frame = [0, True]
+    rect = None
     image_list = []
     speedx = 0
     speedy = 0
