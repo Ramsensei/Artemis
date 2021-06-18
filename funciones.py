@@ -223,7 +223,7 @@ def mi_auto_doc():
         "tus habilidades de esquivar meteoritos.\n"+
         "En cada nivel aumentan la cantidad de meteoritos y\n"+
         "La dificultad aumentará, tienes 60s para sobrevivir.\n"+
-        "¡Suerte!")
+        "¡Suerte!\n")
         file.write(txt)
         file.write(clases.Menu.__doc__)
         file.write(clases.About.__doc__)

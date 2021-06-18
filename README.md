@@ -6,6 +6,7 @@ tus habilidades de esquivar meteoritos.
 En cada nivel aumentan la cantidad de meteoritos y
 La dificultad aumentará, tienes 60s para sobrevivir.
 ¡Suerte!
+
     ********************************************
     Instituto Tecnológico de Costa Rica
     Ing. Computadores
