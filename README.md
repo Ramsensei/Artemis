@@ -21,7 +21,7 @@ Python v3.9.5
     Fecha Última Modificación: 12/06/2021
     Módulo: Pantalla About
     Descripción: Este módulo muestra la información
-    complementaria del juego, así como los créditos 
+    complementaria del juego, así como los créditos
     del mismo.
     Autores: Valesska Blanco M & Ramsés Gutiérrez R
     ********************************************

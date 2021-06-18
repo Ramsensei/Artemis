@@ -85,7 +85,7 @@ class Menu(object):
                 if self.b_nivel1.collidepoint(pg.mouse.get_pos()):
                     self.change = "Game1"
                     if not fc.name_text:
-                        fc.name_text = "Anonymous"  # Default name
+                        fc.name_text = "Anonymous"  # Default name  
 
                 # Botón de nivel 2
                 if self.b_nivel2.collidepoint(pg.mouse.get_pos()):
