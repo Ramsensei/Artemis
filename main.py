@@ -1,23 +1,30 @@
+# Importaciones
 import pygame
+import funciones as fc
 from funciones import FPS, VENTANA_PRINCIPAL
 import clases
 
 pygame.init()
 
+
 # Módulo principall
-
-
 def main():
 
     pygame.display.set_caption("Artemis")
     clock = pygame.time.Clock()
     run = True
 
+    # Definiendo menú principal como primera pantalla
     screen = clases.Menu()
-    print(clases.Menu.__doc__)
+    
+    # Imprimiendo documentación
+    fc.mi_auto_doc()
+
+    # Bucle principal
     while run:
         run = screen.process_events()
 
+        # Manejo de pantallas
         if screen.change == "Menu":
             screen = clases.Menu()
         elif screen.change == "Game1":
@@ -33,10 +40,13 @@ def main():
         elif screen.change == "GameOver":
             screen = clases.GameOver()
 
+        # Ejecutando métodos
         screen.run_logic()
         screen.display_frame(VENTANA_PRINCIPAL)
 
+        # frames per second
         clock.tick(FPS)
+        
     pygame.quit()
 
 
