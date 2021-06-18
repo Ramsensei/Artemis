@@ -181,6 +181,7 @@ class About(object):
 
         self.BACKGROUND = pg.transform.scale(fc.up_img("background.png"), (fc.WIDTH, fc.HEIGHT))
         self.VALESSKA = pg.transform.scale(fc.up_img("valesska.png"), (200, 200))
+        self.RAM = pg.transform.scale(fc.up_img("ram.png"), (200, 200))
         self.b_back = pg.Rect(450, 0, 150, 75)
 
         fc.play_song("Avengers.mp3")
@@ -206,6 +207,7 @@ class About(object):
 
         screen.blit(self.BACKGROUND, (0, 0))
         screen.blit(self.VALESSKA, (80,550))
+        screen.blit(self.RAM, (300,550))
         fc.draw_button(screen, self.b_back, "Menu")
 
         #Escribiendo la información de about
