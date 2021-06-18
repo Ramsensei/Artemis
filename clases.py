@@ -4,6 +4,7 @@ import random
 from pygame.locals import MOUSEBUTTONDOWN
 import funciones as fc
 
+
 # Clase del Menu Principal
 class Menu(object):
     """
@@ -77,8 +78,8 @@ class Menu(object):
 
                 # Botón de iniciar juego
                 if self.b_play.collidepoint(pg.mouse.get_pos()):
-                    self.change = "Game1" # Cambio de pantalla
-                    if not fc.name_text: # Si no se introdujo un nombre
+                    self.change = "Game1"  # Cambio de pantalla
+                    if not fc.name_text:  # Si no se introdujo un nombre
                         fc.name_text = "Anonymous"  # Default name
 
                 # Botón de nivel 1
@@ -109,7 +110,7 @@ class Menu(object):
 
                 # Input box
                 if self.input_box.collidepoint(event.pos):
-                    self.Active = True # se activa la escritura en input box
+                    self.Active = True  # se activa la escritura en input box
 
             # Detectando las presiones de teclas
             if event.type == pg.KEYDOWN:
@@ -206,11 +207,11 @@ class About(object):
     def display_frame(self, screen):
 
         screen.blit(self.BACKGROUND, (0, 0))
-        screen.blit(self.VALESSKA, (80,550))
-        screen.blit(self.RAM, (300,550))
+        screen.blit(self.VALESSKA, (80, 550))
+        screen.blit(self.RAM, (300, 550))
         fc.draw_button(screen, self.b_back, "Menu")
 
-        #Escribiendo la información de about
+        # Escribiendo la información de about
         fc.draw_text_lines(fc.about, fc.WHITE, 70, 100)
         pg.display.update()
 
@@ -380,8 +381,8 @@ class Game(object):
         self.b_back = pg.Rect(450, 0, 150, 75)
 
         # Asignando valores a las variables
-        self.time_init = time.time() # tiempo inicial
-        self.level = level # nivel que se va a desplegar
+        self.time_init = time.time()  # tiempo inicial
+        self.level = level  # nivel que se va a desplegar
         self.player = Player()
         self.plySpeed = 5
         self.player.speedx = 0
@@ -447,7 +448,7 @@ class Game(object):
         # Actualizando los sprites a 60FPS
         self.sprites.update()
         self.meteoritos.update()
-        self.timer = time.time() # toma de tiempo
+        self.timer = time.time()  # toma de tiempo
 
         # Puntaje por nivel
         if self.timer - self.time_score >= 1:
@@ -487,7 +488,7 @@ class Game(object):
         fc.draw_text("Jugador: " + fc.name_text, fc.WHITE, 140, 30)
         fc.draw_text("Vida: " + str(fc.player_life), fc.WHITE, 350, 30)
         elapsed_time = int(time.time() - self.time_init)
-        fc.draw_text("Tiempo: "+ str(elapsed_time), fc.WHITE, 10, 750)
+        fc.draw_text("Tiempo: " + str(elapsed_time), fc.WHITE, 10, 750)
 
         # Dibujando los sprites
         self.player.next_frame()
@@ -562,7 +563,7 @@ class Player(pg.sprite.Sprite):
 
 # Clase de Meteoritos
 class Meteoritos(pg.sprite.Sprite):
-    '''
+    """
     ********************************************
     Instituto Tecnológico de Costa Rica
     Ing. Computadores
@@ -574,11 +575,11 @@ class Meteoritos(pg.sprite.Sprite):
     completo de los meteoritos, cada vez que se llama
     genera un meteorito nuevo con un movimiento relativamente
     aleatorio y velocidades aleatorias. También detecta
-    las colisiones entre él mismo y el jugador, baja la 
+    las colisiones entre él mismo y el jugador, baja la
     vida del jugador y se autodestruye.
     Autores: Valesska Blanco M & Ramsés Gutiérrez R
     ********************************************
-    '''
+    """
 
     speed = (4, 4)
     speedrange = (1, 7)
@@ -612,7 +613,7 @@ class Meteoritos(pg.sprite.Sprite):
                 and self.rect.y + self.rect.height > fc.player_coords[1]):
             fc.player_life -= 1
             fc.play_fx()
-            self.kill() # desaparece el meteorito
+            self.kill()  # desaparece el meteorito
             return
 
         if self.movx and (self.rect.x + (2 * self.radius) >= fc.WIDTH):
