@@ -6,7 +6,7 @@ import funciones as fc
 
 # Clase del Menu Principal
 class Menu(object):
-    '''
+    """
     ********************************************
     Instituto Tecnológico de Costa Rica
     Ing. Computadores
@@ -19,7 +19,7 @@ class Menu(object):
     de texto, música de fondo y acceso a otras pantallas
     Autores: Valesska Blanco M & Ramsés Gutiérrez R
     ********************************************
-    '''
+    """
 
     # Propiedades de la clase
     name = "Menu"
@@ -158,7 +158,7 @@ class Menu(object):
 
 # Clase de Pantalla About
 class About(object):
-    '''
+    """
     ********************************************
     Instituto Tecnológico de Costa Rica
     Ing. Computadores
@@ -167,11 +167,11 @@ class About(object):
     Fecha Última Modificación: 12/06/2021
     Módulo: Pantalla About
     Descripción: Este módulo muestra la información
-    complementaria del juego, así como los créditos 
+    complementaria del juego, así como los créditos
     del mismo.
     Autores: Valesska Blanco M & Ramsés Gutiérrez R
     ********************************************
-    '''
+    """
 
     change = "No"
     name = "About"
@@ -275,7 +275,7 @@ class Top(object):
 
 # Clase de Pantalla de GameOver
 class GameOver(object):
-    '''
+    """
     ********************************************
     Instituto Tecnológico de Costa Rica
     Ing. Computadores
@@ -289,7 +289,7 @@ class GameOver(object):
     da la opción de regresar al menú principal.
     Autores: Valesska Blanco M & Ramsés Gutiérrez R
     ********************************************
-    '''
+    """
 
     change = "No"
     name = "GameOver"
@@ -338,7 +338,7 @@ class GameOver(object):
 
 # Clase de Pantalla de Juego
 class Game(object):
-    '''
+    """
     ********************************************
     Instituto Tecnológico de Costa Rica
     Ing. Computadores
@@ -354,7 +354,7 @@ class Game(object):
     de cambio de pantalla entre niveles, pérdida y gane del juego.
     Autores: Valesska Blanco M & Ramsés Gutiérrez R
     ********************************************
-    '''
+    """
 
     # Propiedades
     change = "No"

@@ -31,7 +31,7 @@ info = ("Costa Rica\nInstituto Tecnológico de Costa Rica" +
         "\nProf: Milton Villegas Lemus\nVersión: Artemis 1.0\nAutores: " +
         "\nValesska Blanco Montoya & " +
         "\nDarío Gutiérrez Rodríguez")
-about = info.split('\n') # Línea para hacer saltos de línea cada que haya un '\n'
+about = info.split('\n')  # Línea para hacer saltos de línea cada que haya un '\n'
 
 # Información relacionada al jugador
 
@@ -43,7 +43,6 @@ posicion = 0
 # Funciones para cargar archivos
 
 def up_img(name):
-
     ruta = path.join("assets", name)
     img = pygame.image.load(ruta)
 
@@ -53,7 +52,6 @@ def up_img(name):
 # Funciones para cargar varias imágenes y animar
 
 def cargarVariasImg(inputx, listaResultado):
-
     if not inputx:
 
         return listaResultado
@@ -100,14 +98,13 @@ def stop_song():
 
 
 def draw_button(screen, button, palabra):
-
     # Cambiando de color si el mouse está encima del botón
 
     if button.collidepoint(pygame.mouse.get_pos()):
 
         pygame.draw.rect(screen, GRAY, button, 0)
 
-    else: # Color por default del botón
+    else:  # Color por default del botón
 
         pygame.draw.rect(screen, BLACK, button, 0)
 
@@ -116,7 +113,7 @@ def draw_button(screen, button, palabra):
                       button.y + (button.height - txt.get_height()) / 2))
 
 
-#Función para crear la entrada de texto
+# Función para crear la entrada de texto
 
 def draw_entry(screen, input_box, text, color):
     pygame.draw.rect(screen, color, input_box, 0)
@@ -124,11 +121,13 @@ def draw_entry(screen, input_box, text, color):
     txt = FUENTE.render(text, True, BLACK)
     screen.blit(txt, (input_box.x + 5, input_box.y + 15))
 
+
 # Función para escribir texto en pantalla, cuando sea necesario
 
 def draw_text(text, color, x, y, screen=VENTANA_PRINCIPAL):
     txt = FUENTE.render(text, True, color)
     screen.blit(txt, (x, y))
+
 
 # Función para imprimir una lista que contiene strings separados por línea
 
@@ -144,7 +143,6 @@ def draw_text_lines(list_text, color, x, y, screen=VENTANA_PRINCIPAL):
 # Función de ordenamiento
 
 def quick_sort(array):
-
     less = []  # Lista con números menores al pivote
     equal = []  # Lista con números iguales al pivote
     greater = []  # Lista con números mayores al pivote
@@ -172,10 +170,10 @@ def quick_sort(array):
     else:
         return array
 
+
 # Función para actualizar los scores
 
 def update_rank():
-
     global posicion
 
     file = open("BestScores.artemis", "rt")
@@ -195,7 +193,7 @@ def update_rank():
 
     for line in lines:
         if line:
-            score_tuples += [(line[30:], line[:30])]  
+            score_tuples += [(line[30:], line[:30])]
 
     lines = quick_sort(score_tuples)  # Ordenamiento de los puntajes
     text = ""  # Creando un nuevo texto
@@ -216,10 +214,9 @@ def update_rank():
     file.close()
     return rank
 
+
 def mi_auto_doc():
-
-    with open("README.md",'w') as file:
-
+    with open("README.md", 'w') as file:
         txt = "Artemis: The Game\nPython v3.9.5"
         file.write(txt)
         file.write(clases.Menu.__doc__)
@@ -229,3 +226,4 @@ def mi_auto_doc():
         file.write(clases.Game.__doc__)
         file.write(clases.Player.__doc__)
         file.write(clases.Meteoritos.__doc__)
+        file.close()
