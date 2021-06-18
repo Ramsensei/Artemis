@@ -24,6 +24,7 @@ def main():
     while run:
         run = screen.process_events()
 
+        # Manejo de pantallas
         if screen.change == "Menu":
             screen = clases.Menu()
         elif screen.change == "Game1":
@@ -39,10 +40,13 @@ def main():
         elif screen.change == "GameOver":
             screen = clases.GameOver()
 
+        # Ejecutando métodos
         screen.run_logic()
         screen.display_frame(VENTANA_PRINCIPAL)
 
+        # frames per second
         clock.tick(FPS)
+        
     pygame.quit()
 
 

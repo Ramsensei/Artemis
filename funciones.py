@@ -220,6 +220,8 @@ def mi_auto_doc():
 
     with open("README.md",'w') as file:
 
+        txt = "Artemis: The Game\nPython v3.9.5"
+        file.write(txt)
         file.write(clases.Menu.__doc__)
         file.write(clases.About.__doc__)
         file.write(clases.Top.__doc__)
