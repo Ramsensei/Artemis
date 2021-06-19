@@ -237,11 +237,15 @@ class Top(object):
     change = "No"
     name = "Top"
     b_back = None
+    b_puntaje = None
+    b_nombre = None
 
     def __init__(self):
 
         self.BACKGROUND = pg.transform.scale(fc.up_img("background.png"), (fc.WIDTH, fc.HEIGHT))
         self.b_back = pg.Rect(450, 0, 150, 75)
+        self.b_nombre = pg.Rect(100, 650, 150, 75)
+        self.b_puntaje = pg.Rect(300, 650, 150, 75)
 
         fc.play_song("Avengers.mp3")
 
@@ -256,6 +260,12 @@ class Top(object):
                 if self.b_back.collidepoint(pg.mouse.get_pos()):
                     self.change = "Menu"
 
+                if self.b_nombre.collidepoint(pg.mouse.get_pos()):
+                    print("Ordenando por nombre (Insertion)")
+
+                if self.b_puntaje.collidepoint(pg.mouse.get_pos()):
+                    print("Ordenando por nombre (QuickSort)")
+
         return True
 
     def run_logic(self):
@@ -265,11 +275,15 @@ class Top(object):
 
         screen.blit(self.BACKGROUND, (0, 0))
         fc.draw_button(screen, self.b_back, "Menu")
+        fc.draw_button(screen, self.b_nombre, "Nombre")
+        fc.draw_button(screen, self.b_puntaje, "Puntaje")
 
         # Abriendo y escribiendo el archivo de mejores puntajes
         with open("BestScores.artemis", "r") as file:
             lista_top10 = file.readlines()
+
         fc.draw_text("Top 10", fc.WHITE, 70, 50)
+        fc.draw_text("Ordenar los puntajes por:", fc.WHITE, 150, 600)
         fc.draw_text_lines(lista_top10, fc.WHITE, 70, 150)
         pg.display.update()
 
