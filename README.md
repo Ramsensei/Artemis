@@ -1,5 +1,12 @@
 Artemis: The Game
 Python v3.9.5
+Tres niveles, tres vidas, 60 segundos.
+Artemis es un juego donde pondrás a prueba
+tus habilidades de esquivar meteoritos.
+En cada nivel aumentan la cantidad de meteoritos y
+La dificultad aumentará, tienes 60s para sobrevivir.
+¡Suerte!
+
     ********************************************
     Instituto Tecnológico de Costa Rica
     Ing. Computadores
@@ -21,7 +28,7 @@ Python v3.9.5
     Fecha Última Modificación: 12/06/2021
     Módulo: Pantalla About
     Descripción: Este módulo muestra la información
-    complementaria del juego, así como los créditos 
+    complementaria del juego, así como los créditos
     del mismo.
     Autores: Valesska Blanco M & Ramsés Gutiérrez R
     ********************************************
@@ -93,7 +100,7 @@ Python v3.9.5
     completo de los meteoritos, cada vez que se llama
     genera un meteorito nuevo con un movimiento relativamente
     aleatorio y velocidades aleatorias. También detecta
-    las colisiones entre él mismo y el jugador, baja la 
+    las colisiones entre él mismo y el jugador, baja la
     vida del jugador y se autodestruye.
     Autores: Valesska Blanco M & Ramsés Gutiérrez R
     ********************************************

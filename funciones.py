@@ -217,7 +217,13 @@ def update_rank():
 
 def mi_auto_doc():
     with open("README.md", 'w') as file:
-        txt = "Artemis: The Game\nPython v3.9.5"
+        txt = ("Artemis: The Game\nPython v3.9.5\n"+
+        "Tres niveles, tres vidas, 60 segundos.\n"+
+        "Artemis es un juego donde pondrás a prueba\n"+
+        "tus habilidades de esquivar meteoritos.\n"+
+        "En cada nivel aumentan la cantidad de meteoritos y\n"+
+        "La dificultad aumentará, tienes 60s para sobrevivir.\n"+
+        "¡Suerte!\n")
         file.write(txt)
         file.write(clases.Menu.__doc__)
         file.write(clases.About.__doc__)
