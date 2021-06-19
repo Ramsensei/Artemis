@@ -281,6 +281,7 @@ class Top(object):
         # Abriendo y escribiendo el archivo de mejores puntajes
         with open("BestScores.artemis", "r") as file:
             lista_top10 = file.readlines()
+            file.close()
 
         fc.draw_text("Top 10", fc.WHITE, 70, 50)
         fc.draw_text("Ordenar los puntajes por:", fc.WHITE, 150, 600)

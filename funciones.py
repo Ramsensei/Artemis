@@ -171,7 +171,7 @@ def quick_sort(array):
         return array
 
 
-def insertion_sort(array, result=[], i=0):
+def insertion_sort(array, result, i=0):
     if not array:
         return result
     elif not result or i == len(result):
@@ -238,8 +238,10 @@ def actualizar(sort):
     for line in lines:
         if line:
             score_tuples += [(line[30:], line[:30])]
+
+    # Ordenamiento de los puntajes
     if sort == 1:
-        lines = insertion_sort(score_tuples)  # Ordenamiento de los puntajes
+        lines = insertion_sort(score_tuples, [])
     else:
         lines = quick_sort(score_tuples)
 
