@@ -261,10 +261,10 @@ class Top(object):
                     self.change = "Menu"
 
                 if self.b_nombre.collidepoint(pg.mouse.get_pos()):
-                    print("Ordenando por nombre (Insertion)")
+                    fc.actualizar(1)
 
                 if self.b_puntaje.collidepoint(pg.mouse.get_pos()):
-                    print("Ordenando por nombre (QuickSort)")
+                    fc.actualizar(0)
 
         return True
 

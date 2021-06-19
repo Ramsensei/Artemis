@@ -171,6 +171,19 @@ def quick_sort(array):
         return array
 
 
+def insertion_sort(array, result=[], i=0):
+    if not array:
+        return result
+    elif not result or i == len(result):
+        result.append(array[0])
+        return insertion_sort(array[1:], result)
+    elif array[0][1] > result[i][1]:
+        return insertion_sort(array, result, i + 1)
+    else:
+        result.insert(i, array[0])
+        return insertion_sort(array[1:], result)
+
+
 # Función para actualizar los scores
 
 def update_rank():
@@ -215,15 +228,44 @@ def update_rank():
     return rank
 
 
+def actualizar(sort):
+    file = open("BestScores.artemis", "rt")
+    text = file.read()
+    file.close()
+
+    lines = text.split("\n")  # Dividiendo las líneas
+    score_tuples = []
+    for line in lines:
+        if line:
+            score_tuples += [(line[30:], line[:30])]
+    if sort == 1:
+        lines = insertion_sort(score_tuples)  # Ordenamiento de los puntajes
+    else:
+        lines = quick_sort(score_tuples)
+
+    text = ""  # Creando un nuevo texto
+
+    if len(lines) > 10:  # Límite de 1 líneas
+        lines = lines[:10]
+
+    # Pre-output process
+    for line in lines:
+        text += line[1] + line[0] + "\n"  # Transformando las tuplas a texto
+
+    file = open("BestScores.artemis", "wt")
+    file.write(text)
+    file.close()
+
+
 def mi_auto_doc():
     with open("README.md", 'w') as file:
-        txt = ("Artemis: The Game\nPython v3.9.5\n"+
-        "Tres niveles, tres vidas, 60 segundos.\n"+
-        "Artemis es un juego donde pondrás a prueba\n"+
-        "tus habilidades de esquivar meteoritos.\n"+
-        "En cada nivel aumentan la cantidad de meteoritos y\n"+
-        "La dificultad aumentará, tienes 60s para sobrevivir.\n"+
-        "¡Suerte!\n")
+        txt = ("Artemis: The Game\nPython v3.9.5\n" +
+               "Tres niveles, tres vidas, 60 segundos.\n" +
+               "Artemis es un juego donde pondrás a prueba\n" +
+               "tus habilidades de esquivar meteoritos.\n" +
+               "En cada nivel aumentan la cantidad de meteoritos y\n" +
+               "La dificultad aumentará, tienes 60s para sobrevivir.\n" +
+               "¡Suerte!\n")
         file.write(txt)
         file.write(clases.Menu.__doc__)
         file.write(clases.About.__doc__)
